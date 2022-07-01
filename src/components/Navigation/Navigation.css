@@ -1,0 +1,35 @@
+.navigation{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+
+}
+
+.navigation__link{
+    margin-right:20px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    text-decoration: none;
+    color: black;
+}
+
+.navigation__link:hover{
+    opacity: 0.6;
+    transition: ease 0.6s;
+}
+
+.navigation__button{
+    margin-left: 30px;
+    width:100px;
+    height: 32px;
+}
+
+.navigation__button:hover{
+    cursor: pointer;
+    opacity: 0.6;
+    transition: ease 0.6s;
+}
