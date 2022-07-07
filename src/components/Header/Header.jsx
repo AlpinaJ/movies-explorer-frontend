@@ -1,3 +1,4 @@
+import React from "react";
 import "./Header.css";
 import "../Navigation/Navigation";
 import logoPath from "../../images/logo.svg";

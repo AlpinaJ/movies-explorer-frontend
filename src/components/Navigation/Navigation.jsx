@@ -1,3 +1,4 @@
+import React from "react";
 import "./Navigation.css";
 import accountPath from "../../images/account.svg";
 

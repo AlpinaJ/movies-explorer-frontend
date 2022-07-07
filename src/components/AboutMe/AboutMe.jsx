@@ -1,3 +1,4 @@
+import React from "react";
 import "./AboutMe.css";
 import profilePath from "../../images/profile.jpg";
 

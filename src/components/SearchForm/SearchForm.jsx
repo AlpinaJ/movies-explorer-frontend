@@ -1,3 +1,4 @@
+import React from "react";
 import Checkbox from "../Checkbox/Chekbox";
 import "./SearchForm.css";
 import findImagePath from "../../images/find.svg";

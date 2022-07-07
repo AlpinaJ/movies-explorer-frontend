@@ -1,3 +1,4 @@
+import React from "react";
 import "./Promo.css";
 import promoPath from "../../images/promo.svg";
 
@@ -11,7 +12,7 @@ function Promo(){
                     этот проект и его создателя.</p>
                 <button className="promo__button"> Узнать больше</button>
             </div>
-            <img className="promo__image" src={promoPath}/>
+            <img className="promo__image" src={promoPath} alt="Планета"/>
         </div>
     )
 }

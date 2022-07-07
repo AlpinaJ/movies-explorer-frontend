@@ -1,3 +1,4 @@
+import React from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import card1Path from "../../images/cards/card1.png";

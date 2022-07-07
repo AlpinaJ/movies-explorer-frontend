@@ -1,3 +1,4 @@
+import React from "react";
 import "./MoviesCard.css";
 
 function MoviesCard({name, image, duration, isSaved, isInSavedMovies}) {
