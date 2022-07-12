@@ -1,9 +1,13 @@
 .header{
-    background-color: #F3C1F8;
+    background-color: white;
     padding: 0 70px 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.header_colored{
+    background-color: #F3C1F8;
 }
 
 .header__logo{
@@ -50,4 +54,17 @@
     cursor: pointer;
     opacity: 0.99;
     transition: ease 0.6s;
+}
+
+@media screen and (max-width: 768px){
+    .header{
+        padding: 0 30px;
+    }
+}
+
+
+@media screen and (max-width: 320px){
+    .header{
+        padding: 0 14px;
+    }
 }

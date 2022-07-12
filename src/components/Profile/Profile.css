@@ -101,3 +101,10 @@
     opacity: 0.6;
     cursor: pointer;
 }
+
+
+@media screen and (max-width: 550px){
+    .profile__container{
+        width: 260px;
+    }
+}

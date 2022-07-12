@@ -52,3 +52,33 @@
     height: 60px;
     object-fit: fill;
 }
+
+
+@media screen and (max-width: 768px){
+    .portfolio{
+        padding: 0 50px 90px;
+    }
+    .portfolio__image{
+        width: 27px;
+    }
+    .portfolio__name{
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 630px){
+    .portfolio{
+        padding: 0 14px 70px;
+    }
+    .portfolio__image{
+        width: 18px;
+        height: 28px;
+    }
+    .portfolio__header{
+        font-size: 14px;
+    }
+    .portfolio__name{
+        font-size: 18px;
+        line-height: 28px;
+    }
+}

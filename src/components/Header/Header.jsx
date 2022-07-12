@@ -5,12 +5,12 @@ import logoPath from "../../images/logo.svg";
 import Navigation from "../Navigation/Navigation";
 import {Link} from 'react-router-dom';
 
-function Header({loggedIn}) {
+function Header({loggedIn, isColor}) {
     return (
-        <header className="header">
+        <header className={isColor ? ("header header_colored") : ("header")}>
             <img src={logoPath} className="header__logo" alt="Лого"/>
             {loggedIn ? (
-                <Navigation/>
+                <Navigation isColor={isColor}/>
             ) : (
                 <ul className="header__links">
                     <li className="header__link-item">
@@ -24,7 +24,7 @@ function Header({loggedIn}) {
                         </a>
                     </li>
                 </ul>
-                )}
+            )}
         </header>
     )
 }
