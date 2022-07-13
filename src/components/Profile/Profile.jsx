@@ -1,6 +1,7 @@
 import "./Profile.css";
 import React from "react";
 import Header from "../Header/Header";
+import {Link} from "react-router-dom";
 
 function Profile({username, useremail}) {
     const [userName, setUserName] = React.useState("");
@@ -51,9 +52,9 @@ function Profile({username, useremail}) {
                             Редактировать
                         </button>
                     </form>
-                    <a href="#" className="profile__logout">
+                    <Link to="/signin" className="profile__logout">
                             Выйти из аккаунта
-                    </a>
+                    </Link>
                 </div>
             </div>
         </>

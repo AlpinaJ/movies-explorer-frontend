@@ -112,6 +112,12 @@
     margin: 621px auto 0;
 }
 
+.navigation__account-link{
+    width: 100px;
+    height: 32px;
+    margin: 0 auto;
+}
+
 @media screen and (max-width: 520px){
     .burger__open{
         width: 100%;

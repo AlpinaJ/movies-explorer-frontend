@@ -3,6 +3,7 @@ import "./Navigation.css";
 import accountPath from "../../images/account.svg";
 import burgerPath from "../../images/burger.svg";
 import closePath from "../../images/close.svg";
+import {Link, NavLink} from "react-router-dom";
 
 function Navigation({isColor}) {
     const isMobile = window.screen.width <= 768;
@@ -28,13 +29,16 @@ function Navigation({isColor}) {
                                     <button onClick={handleCloseBurger}
                                             className="burger__close-button">
                                     </button>
-                                    <a href="#" className="navigation__link navigation__link_burger navigation__link_active">
-                                        Главная </a>
-                                    <a href="#" className="navigation__link navigation__link_burger">
-                                        Фильмы </a>
-                                    <a href="#" className="navigation__link navigation__link_burger">
-                                        Сохраненные фильмы </a>
-                                    <img src={accountPath} alt="Аккаунт" className="navigation__button navigation__button_burger"/>
+                                    <Link to="/" className="navigation__link navigation__link_burger navigation__link_active">
+                                        Главная </Link>
+                                    <Link to="/movies" className="navigation__link navigation__link_burger">
+                                        Фильмы </Link>
+                                    <Link to="/saved-movies" className="navigation__link navigation__link_burger">
+                                        Сохраненные фильмы </Link>
+                                    <Link to="/profile" className="navigation__account-link">
+                                        <img src={accountPath} alt="Аккаунт" className="navigation__button navigation__button_burger"/>
+                                    </Link>
+
                                 </div>
                             ) :
                             (
@@ -48,9 +52,11 @@ function Navigation({isColor}) {
                     ) :
                     (
                         <div className="navigation">
-                            <a href="#" className="navigation__link"> Фильмы </a>
-                            <a href="#" className="navigation__link"> Сохраненные фильмы </a>
-                            <img src={accountPath} alt="Аккаунт" className="navigation__button"/>
+                            <Link to="/movies" className="navigation__link"> Фильмы </Link>
+                            <Link to="/saved-movies" className="navigation__link"> Сохраненные фильмы </Link>
+                            <Link to="/profile" className="navigation__account-link">
+                                <img src={accountPath} alt="Аккаунт" className="navigation__button"/>
+                            </Link>
                         </div>
                     )
             }

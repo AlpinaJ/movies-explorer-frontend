@@ -8,20 +8,22 @@ import {Link} from 'react-router-dom';
 function Header({loggedIn, isColor}) {
     return (
         <header className={isColor ? ("header header_colored") : ("header")}>
-            <img src={logoPath} className="header__logo" alt="Лого"/>
+            <Link to="/">
+                <img src={logoPath} className="header__logo" alt="Лого"/>
+            </Link>
             {loggedIn ? (
                 <Navigation isColor={isColor}/>
             ) : (
                 <ul className="header__links">
                     <li className="header__link-item">
-                        <a href="#" className="header__link">
+                        <Link to="/signup" className="header__link">
                             Регистрация
-                        </a>
+                        </Link>
                     </li>
                     <li className="header__link-item">
-                        <a href="#" className="header__link">
+                        <Link to="/signin" className="header__link">
                             <button className="header__button">Войти</button>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             )}

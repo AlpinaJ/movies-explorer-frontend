@@ -17,8 +17,14 @@ function AboutMe(){
                         становится красивым и удобным для пользователя. В свободное время люблю
                         кататься на велосипеде, а также занимаюсь большим теннисом.</p>
                     <div className="about-me__links">
-                        <a href="#" className="about-me__link">Telegram</a>
-                        <a  href="#" className="about-me__link">Github</a>
+                        <a href="https://t.me/AlpinaJ"
+                           target="_blank" className="about-me__link">
+                            Telegram
+                        </a>
+                        <a href="https://github.com/AlpinaJ"
+                           target="_blank"className="about-me__link">
+                            Github
+                        </a>
                     </div>
                 </div>
                 <img src={profilePath} className="about-me__photo" alt="Мое фото"/>

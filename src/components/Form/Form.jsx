@@ -1,11 +1,14 @@
 import React from "react";
 import "./Form.css";
 import logoPath from "../../images/form__logo.svg";
+import {Link} from "react-router-dom";
 
 function Form({heading, inputs, button, span, isRegister}) {
     return (
         <div className="form__container">
-            <img className="form__logo" src={logoPath}/>
+            <Link to="/">
+                <img className="form__logo" src={logoPath}/>
+            </Link>
             <h1 className="form__heading">{heading}</h1>
             <form className="form__form">
                 <div className="form__inputs">{inputs}</div>
@@ -13,9 +16,9 @@ function Form({heading, inputs, button, span, isRegister}) {
             </form>
             <span className="form__span">{span}
                 {isRegister ? (
-                    <a href="#" className="form__link">Войти</a>
+                    <Link to="/signin" className="form__link">Войти</Link>
                 ):
-                    (<a href="#" className="form__link">Регистрация</a>)}
+                    (<Link to="/signup"  className="form__link">Регистрация</Link>)}
             </span>
         </div>
     )

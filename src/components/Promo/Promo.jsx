@@ -10,7 +10,7 @@ function Promo(){
                 Веб-разработки. </h1>
                 <p className="promo__text"> Листайте ниже, чтобы узнать больше про
                     этот проект и его создателя.</p>
-                <button className="promo__button"> Узнать больше</button>
+                <a href="#about-project" className="promo__button"> Узнать больше</a>
             </div>
             <img className="promo__image" src={promoPath} alt="Планета"/>
         </div>

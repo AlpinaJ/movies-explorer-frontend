@@ -43,6 +43,9 @@
     background-color: #F3C1F8;
     width: 129px;
     height: 36px;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
 }
 
 .promo__button:hover{
