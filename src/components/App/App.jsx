@@ -9,6 +9,7 @@ import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
 import {Route} from "react-router-dom";
 import {Routes} from "react-router-dom";
+import "./App.css";
 
 function App() {
     return (
