@@ -40,6 +40,7 @@
 
 .form__span{
     margin: 0 auto;
+    color: #A0A0A0;
 }
 
 .form__link{
@@ -68,5 +69,13 @@
     }
     .form__heading{
         margin: 50px auto 80px;
+    }
+    .form__span{
+        font-size: 14px;
+        line-height: 17px;
+    }
+    .form__link{
+        font-size: 14px;
+        line-height: 17px;
     }
 }
