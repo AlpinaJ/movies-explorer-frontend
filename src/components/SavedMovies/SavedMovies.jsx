@@ -9,7 +9,7 @@ function SavedMovies(){
         <>
             <Header loggedIn={true}/>
             <SearchForm/>
-            <MoviesCardList isSavedMoviesPage={true}/>
+            <MoviesCardList isSavedMoviesPage={true} isMoreButton={false}/>
             <Footer/>
         </>
     )
