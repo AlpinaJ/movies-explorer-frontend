@@ -15,7 +15,7 @@ function Form({heading, inputs, button, span, isRegister}) {
                 {isRegister ? (
                     <a href="#" className="form__link">Войти</a>
                 ):
-                    (<a href="#" className="form__link">Зарегистрироваться</a>)}
+                    (<a href="#" className="form__link">Регистрация</a>)}
             </span>
         </div>
     )
