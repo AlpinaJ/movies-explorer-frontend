@@ -26,7 +26,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 123px 0 10px;
+    margin: 123px 0 0;
 }
 
 .profile__input-container{
