@@ -10,7 +10,7 @@ import Footer from "../Footer/Footer";
 function Main() {
     return (
         <>
-            <Header loggedIn={false} isColor={true}/>
+            <Header loggedIn={false} isColor={true} isMain={true}/>
             <Promo/>
             <AboutProject/>
             <Techs/>

@@ -1,13 +1,13 @@
 .promo{
     background-color: #F3C1F8;
-    padding: 59px 70px 75px;
+    padding: 75px 50px 80px 70px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
 .promo__container{
-    margin: 0 190px 0 0;
+    margin: 0 170px 0 0;
     color: black;
 }
 
@@ -26,7 +26,7 @@
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
-    margin: 36px 0 146px;
+    margin: 36px 0 151px;
     width: 316px;
     opacity: 0.5;
 }

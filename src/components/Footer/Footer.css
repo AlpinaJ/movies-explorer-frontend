@@ -41,6 +41,8 @@
     text-decoration: none;
     color: black;
     transition: ease 0.6s;
+    font-size: 13px;
+    line-height: 16px;
 }
 
 .footer__link:hover{

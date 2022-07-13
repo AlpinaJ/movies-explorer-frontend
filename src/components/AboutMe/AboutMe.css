@@ -1,5 +1,5 @@
 .about-me{
-    padding: 110px 70px 125px;
+    padding: 110px 70px 2px;
     background-color: white;
 }
 
@@ -110,7 +110,7 @@
         margin-bottom: 87px;
     }
     .about-me__photo{
-        width: 270px;
+        width: 292px;
         height: 327px;
     }
 }

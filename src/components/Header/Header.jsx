@@ -5,14 +5,19 @@ import logoPath from "../../images/logo.svg";
 import Navigation from "../Navigation/Navigation";
 import {Link} from 'react-router-dom';
 
-function Header({loggedIn, isColor}) {
+function Header({loggedIn, isColor, isMain, isMovies, isSavedMovies}) {
     return (
         <header className={isColor ? ("header header_colored") : ("header")}>
             <Link to="/">
                 <img src={logoPath} className="header__logo" alt="Лого"/>
             </Link>
             {loggedIn ? (
-                <Navigation isColor={isColor}/>
+                <Navigation
+                    isColor={isColor}
+                    isMain={isMain}
+                    isMovies={isMovies}
+                    isSavedMovies={isSavedMovies}
+                />
             ) : (
                 <nav className="header__links">
                     <Link to="/signup" className="header__link">

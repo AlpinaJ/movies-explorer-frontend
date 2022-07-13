@@ -6,7 +6,7 @@ import closePath from "../../images/close.svg";
 import {Link, NavLink} from "react-router-dom";
 import { useMediaPredicate } from "react-media-hook";
 
-function Navigation({isColor}) {
+function Navigation({isColor, isMain, isMovies, isSavedMovies}) {
     const isMobile = useMediaPredicate("(max-width: 768px)");
     const [isBurgerOpen, SetBurgerOpen] = React.useState(false);
 
@@ -30,11 +30,20 @@ function Navigation({isColor}) {
                                     <button onClick={handleCloseBurger}
                                             className="burger__close-button">
                                     </button>
-                                    <Link to="/" className="navigation__link navigation__link_burger navigation__link_active">
+                                    <Link to="/" className={isMain? ("navigation__link navigation__link_burger navigation__link_active")
+                                        :(
+                                            "navigation__link navigation__link_burger"
+                                        )}>
                                         Главная </Link>
-                                    <Link to="/movies" className="navigation__link navigation__link_burger">
+                                    <Link to="/movies" className={isMovies? ("navigation__link navigation__link_burger navigation__link_active")
+                                        :(
+                                            "navigation__link navigation__link_burger"
+                                        )}>
                                         Фильмы </Link>
-                                    <Link to="/saved-movies" className="navigation__link navigation__link_burger">
+                                    <Link to="/saved-movies" className={isSavedMovies? ("navigation__link navigation__link_burger navigation__link_active")
+                                        :(
+                                            "navigation__link navigation__link_burger"
+                                        )}>
                                         Сохраненные фильмы </Link>
                                     <Link to="/profile" className="navigation__account-link">
                                         <img src={accountPath} alt="Аккаунт" className="navigation__button navigation__button_burger"/>
