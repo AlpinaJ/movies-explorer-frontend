@@ -3,7 +3,7 @@ import "./Footer.css";
 
 function Footer(){
     return(
-        <div className="footer">
+        <footer className="footer">
             <p className="footer__text">Учебный проект Яндекс.Практикум х BeatFilm.</p>
             <div className="footer__info">
                 <p className="footer__date">© 2022</p>
@@ -19,7 +19,7 @@ function Footer(){
                        target="_blank"className="footer__link">Telegram</a>
                 </div>
             </div>
-        </div>
+        </footer>
     )
 }
 

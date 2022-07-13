@@ -20,7 +20,7 @@ function Register() {
     }
 
     return (
-        <div className="register">
+        <section className="register">
             <Form
                 heading={"Добро пожаловать!"}
                 inputs={
@@ -64,7 +64,7 @@ function Register() {
                 span={"Уже зарегистрированы?"}
                 isRegister={true}
             />
-        </div>
+        </section>
     )
 }
 

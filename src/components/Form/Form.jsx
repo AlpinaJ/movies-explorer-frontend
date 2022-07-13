@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 function Form({heading, inputs, button, span, isRegister}) {
     return (
-        <div className="form__container">
+        <section className="form__container">
             <Link to="/">
                 <img className="form__logo" src={logoPath}/>
             </Link>
@@ -20,7 +20,7 @@ function Form({heading, inputs, button, span, isRegister}) {
                 ):
                     (<Link to="/signup"  className="form__link">Регистрация</Link>)}
             </span>
-        </div>
+        </section>
     )
 }
 

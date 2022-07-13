@@ -14,18 +14,14 @@ function Header({loggedIn, isColor}) {
             {loggedIn ? (
                 <Navigation isColor={isColor}/>
             ) : (
-                <ul className="header__links">
-                    <li className="header__link-item">
-                        <Link to="/signup" className="header__link">
-                            Регистрация
-                        </Link>
-                    </li>
-                    <li className="header__link-item">
-                        <Link to="/signin" className="header__link">
-                            <button className="header__button">Войти</button>
-                        </Link>
-                    </li>
-                </ul>
+                <nav className="header__links">
+                    <Link to="/signup" className="header__link">
+                        Регистрация
+                    </Link>
+                    <Link to="/signin" className="header__link">
+                        <button className="header__button">Войти</button>
+                    </Link>
+                </nav>
             )}
         </header>
     )

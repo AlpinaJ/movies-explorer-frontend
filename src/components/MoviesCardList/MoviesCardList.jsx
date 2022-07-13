@@ -20,9 +20,9 @@ import card16Path from "../../images/cards/card16.png";
 
 function MoviesCardList({isSavedMoviesPage, isMoreButton}) {
     return (
-        <div className="movies-card-list">
+        <section className="movies-card-list">
             {isSavedMoviesPage ? (
-                    <div className="movies-card-list__container">
+                    <ul className="movies-card-list__container">
                         <MoviesCard
                             name={"33 слова о дизайне"}
                             duration={"1ч42м"}
@@ -44,7 +44,7 @@ function MoviesCardList({isSavedMoviesPage, isMoreButton}) {
                             isSaved={false}
                             isInSavedMovies={isSavedMoviesPage}
                         />
-                    </div>
+                    </ul>
                 ) :
                 (
                     <div className="movies-card-list__container">
@@ -167,7 +167,7 @@ function MoviesCardList({isSavedMoviesPage, isMoreButton}) {
             ):(
                 <div className="more-button_disable"></div>
             )}
-        </div>
+        </section>
     )
 }
 

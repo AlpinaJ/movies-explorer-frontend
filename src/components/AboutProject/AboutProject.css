@@ -20,6 +20,8 @@
     flex-direction: row;
     justify-content: space-between;
     margin: 70px 0 110px;
+    list-style-type: none;
+    padding: 0;
 }
 
 
@@ -47,6 +49,8 @@
     grid-template-columns: 1fr 4fr;
     grid-template-rows: 36px;
     row-gap: 14px;
+    list-style-type: none;
+    padding: 0;
 }
 
 .about-project__progressbar-text{

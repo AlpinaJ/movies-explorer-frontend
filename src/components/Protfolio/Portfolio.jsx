@@ -4,9 +4,9 @@ import arrowPath from "../../images/arrow.svg";
 
 function Portfolio(){
     return(
-        <div className="portfolio">
+        <section className="portfolio">
             <h3 className="portfolio__header">Портфолио</h3>
-            <div className="portfolio__links">
+            <ul className="portfolio__links">
                 <a href="https://alpinaj.github.io/how-to-learn/"
                    target="_blank"
                    className="portfolio__link">
@@ -25,8 +25,8 @@ function Portfolio(){
                     <p className="portfolio__name">Одностраничное приложение</p>
                     <img src={arrowPath} className="portfolio__image" alt="Стрелка"/>
                 </a>
-            </div>
-        </div>
+            </ul>
+        </section>
     )
 }
 

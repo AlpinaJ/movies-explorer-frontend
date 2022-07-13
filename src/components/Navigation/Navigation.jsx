@@ -4,9 +4,10 @@ import accountPath from "../../images/account.svg";
 import burgerPath from "../../images/burger.svg";
 import closePath from "../../images/close.svg";
 import {Link, NavLink} from "react-router-dom";
+import { useMediaPredicate } from "react-media-hook";
 
 function Navigation({isColor}) {
-    const isMobile = window.screen.width <= 768;
+    const isMobile = useMediaPredicate("(max-width: 768px)");
     const [isBurgerOpen, SetBurgerOpen] = React.useState(false);
 
     function handleOpenBurger() {
@@ -24,7 +25,7 @@ function Navigation({isColor}) {
                     (
                         isBurgerOpen ?
                             (
-                                <div className="burger__open">
+                                <nav className="burger__open">
                                     <div className="burger__overlay"></div>
                                     <button onClick={handleCloseBurger}
                                             className="burger__close-button">
@@ -39,7 +40,7 @@ function Navigation({isColor}) {
                                         <img src={accountPath} alt="Аккаунт" className="navigation__button navigation__button_burger"/>
                                     </Link>
 
-                                </div>
+                                </nav>
                             ) :
                             (
                                 <>
@@ -51,13 +52,13 @@ function Navigation({isColor}) {
                             )
                     ) :
                     (
-                        <div className="navigation">
+                        <nav className="navigation">
                             <Link to="/movies" className="navigation__link"> Фильмы </Link>
                             <Link to="/saved-movies" className="navigation__link"> Сохраненные фильмы </Link>
                             <Link to="/profile" className="navigation__account-link">
                                 <img src={accountPath} alt="Аккаунт" className="navigation__button"/>
                             </Link>
-                        </div>
+                        </nav>
                     )
             }
         </>)

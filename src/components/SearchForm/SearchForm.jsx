@@ -5,7 +5,7 @@ import findImagePath from "../../images/find.svg";
 
 function SearchForm(){
     return(
-        <div className="search-form">
+        <section className="search-form">
             <form className="search-form__form">
                 <div className="search-form__line">
                     <input type="search"
@@ -23,7 +23,7 @@ function SearchForm(){
             <div className="search__checkbox">
 
             </div>
-        </div>
+        </section>
     )
 }
 

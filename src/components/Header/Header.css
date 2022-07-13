@@ -28,16 +28,14 @@
     padding: 0;
 }
 
-.header__link-item {
+
+.header__link{
     margin-left: 30px;
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
-}
-
-.header__link{
     text-decoration: none;
     color: black;
 }

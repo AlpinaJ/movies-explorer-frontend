@@ -17,6 +17,8 @@
 .portfolio__links{
     display: flex;
     flex-direction: column;
+    list-style-type: none;
+    padding: 0;
 }
 
 .portfolio__link{

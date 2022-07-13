@@ -3,11 +3,11 @@ import "./NotFound.css";
 
 function NotFound(){
     return(
-        <div className="not-found">
+        <section className="not-found">
             <h1 className="not-found__title">404</h1>
             <h2 className="not-found__subtitle">Страница не найдена</h2>
             <a href="#" className="not-found__link">Назад</a>
-        </div>
+        </section>
     )
 }
 

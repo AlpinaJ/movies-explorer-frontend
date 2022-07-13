@@ -16,7 +16,7 @@ function Login() {
     }
 
     return (
-        <div className="login">
+        <section className="login">
             <Form
                 heading={"Рады видеть!"}
                 inputs={
@@ -48,7 +48,7 @@ function Login() {
                 span={"Ещё не зарегистрированы?"}
                 isRegister={false}
             />
-        </div>
+        </section>
     )
 }
 

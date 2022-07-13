@@ -4,7 +4,7 @@ import profilePath from "../../images/profile.jpg";
 
 function AboutMe(){
     return(
-        <div className="about-me">
+        <section className="about-me">
             <div className="about-me__header">Студент</div>
             <div className="about-me__profile">
                 <div className="about-me__description">
@@ -16,20 +16,25 @@ function AboutMe(){
                         Мне приносит огромное удовольствие - видеть, как моими усилиями интерфейс
                         становится красивым и удобным для пользователя. В свободное время люблю
                         кататься на велосипеде, а также занимаюсь большим теннисом.</p>
-                    <div className="about-me__links">
-                        <a href="https://t.me/AlpinaJ"
-                           target="_blank" className="about-me__link">
-                            Telegram
-                        </a>
-                        <a href="https://github.com/AlpinaJ"
-                           target="_blank"className="about-me__link">
-                            Github
-                        </a>
-                    </div>
+                    <ul className="about-me__links">
+                        <li className="about-me__link">
+                            <a href="https://t.me/AlpinaJ"
+                               target="_blank">
+                                Telegram
+                            </a>
+                        </li>
+                        <li className="about-me__link">
+                            <a href="https://github.com/AlpinaJ"
+                               target="_blank">
+                                Github
+                            </a>
+                        </li>
+
+                    </ul>
                 </div>
                 <img src={profilePath} className="about-me__photo" alt="Мое фото"/>
             </div>
-        </div>
+        </section>
     )
 }
 
