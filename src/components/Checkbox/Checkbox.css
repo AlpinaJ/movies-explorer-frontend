@@ -63,3 +63,31 @@
     font-size: 12px;
     line-height: 18px;
 }
+
+@media screen and (max-width: 768px){
+    .checkbox__container{
+        justify-content: right;
+        flex-direction: row-reverse;
+        margin-top: 30px;
+    }
+    .checkbox__checkmark{
+        margin: 0;
+    }
+    .checkbox__option{
+        margin-right: 16px;
+    }
+    .checkbox__label{
+        width: 36px;
+    }
+}
+
+@media screen and (max-width: 320px){
+    .checkbox__container{
+        justify-content: center;
+        margin-top: 41px;
+    }
+    .checkbox__option{
+        margin-right: 13px;
+        font-size: 11px;
+    }
+}

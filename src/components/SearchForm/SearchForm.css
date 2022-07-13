@@ -44,3 +44,19 @@
     margin: 0 0 13px;
     padding: 0;
 }
+
+@media screen and (max-width: 768px){
+    .search-form{
+        padding: 80px 30px 61px;
+    }
+}
+
+@media screen and (max-width: 320px){
+    .search-form{
+        padding: 90px 14px 51px;
+    }
+    .search-form__input{
+        font-size: 18px;
+        line-height: 22px;
+    }
+}

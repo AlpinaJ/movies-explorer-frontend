@@ -18,7 +18,7 @@ import card14Path from "../../images/cards/card14.png";
 import card15Path from "../../images/cards/card15.png";
 import card16Path from "../../images/cards/card16.png";
 
-function MoviesCardList({isSavedMoviesPage}) {
+function MoviesCardList({isSavedMoviesPage, isMoreButton}) {
     return (
         <div className="movies-card-list">
             {isSavedMoviesPage ? (
@@ -162,7 +162,11 @@ function MoviesCardList({isSavedMoviesPage}) {
                         />
                     </div>
                 )}
-
+            {isMoreButton?(
+                <button className="more-button">Ёще</button>
+            ):(
+                <div className="more-button_disable"></div>
+            )}
         </div>
     )
 }
