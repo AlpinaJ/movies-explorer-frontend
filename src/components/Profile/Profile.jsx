@@ -18,7 +18,7 @@ function Profile({username, useremail}) {
     return (
         <>
             <Header loggedIn={true}/>
-            <section className="profile">
+            <main className="profile">
                 <div className="profile__container">
                     <h1 className="profile__heading">Привет, {username}!</h1>
                     <form className="profile__form">
@@ -56,7 +56,7 @@ function Profile({username, useremail}) {
                             Выйти из аккаунта
                     </Link>
                 </div>
-            </section>
+            </main>
         </>
     )
 }

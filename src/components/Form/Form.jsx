@@ -6,8 +6,8 @@ import {Link} from "react-router-dom";
 function Form({heading, inputs, button, span, isRegister}) {
     return (
         <section className="form__container">
-            <Link to="/">
-                <img className="form__logo" src={logoPath}/>
+            <Link to="/" className="form__logo">
+                <img src={logoPath}/>
             </Link>
             <h1 className="form__heading">{heading}</h1>
             <form className="form__form">

@@ -8,8 +8,10 @@ function Movies(){
     return(
         <>
             <Header loggedIn={true} isMovies={true}/>
-            <SearchForm/>
-            <MoviesCardList isSavedMoviesPage={false} isMoreButton={true}/>
+            <main>
+                <SearchForm/>
+                <MoviesCardList isSavedMoviesPage={false} isMoreButton={true}/>
+            </main>
             <Footer/>
         </>
     )

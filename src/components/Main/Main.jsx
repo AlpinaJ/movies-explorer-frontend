@@ -11,11 +11,13 @@ function Main() {
     return (
         <>
             <Header loggedIn={false} isColor={true} isMain={true}/>
-            <Promo/>
-            <AboutProject/>
-            <Techs/>
-            <AboutMe/>
-            <Portfolio/>
+            <main>
+                <Promo/>
+                <AboutProject/>
+                <Techs/>
+                <AboutMe/>
+                <Portfolio/>
+            </main>
             <Footer/>
         </>
     )
