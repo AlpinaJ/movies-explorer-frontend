@@ -1,0 +1,180 @@
+.about-project{
+    background-color: white;
+    padding: 110px 70px;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.about-project__header{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    border-bottom: 1px solid black;
+    padding-bottom: 23px;
+}
+
+.about-project__items{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 70px 0 110px;
+    list-style-type: none;
+    padding: 0;
+}
+
+
+.about-project__title{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+    margin: 0;
+    width: 550px;
+}
+
+.about-project__text{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 26px 0 0;
+    width: 550px;
+}
+
+.about-project__progressbar{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 36px;
+    row-gap: 14px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-project__progressbar-text{
+    margin: 0;
+    font-family: Inter, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+
+    color: #A0A0A0;
+}
+
+.about-project__progressbar-text_background_black{
+    padding-top: 8px;
+    background-color: black;
+    color: white;
+}
+
+.about-project__progressbar-text_background_gray{
+    padding-top: 8px;
+    background-color: #F2F2F2;
+    color: black;
+}
+
+@media screen and (max-width: 1200px){
+    .about-project__title{
+        width: 500px;
+    }
+    .about-project__text{
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 1150px){
+    .about-project__title{
+        width: 450px;
+    }
+    .about-project__text{
+        width: 450px;
+    }
+}
+
+@media screen and (max-width: 1080px){
+    .about-project__title{
+        width: 400px;
+    }
+    .about-project__text{
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 970px){
+    .about-project__title{
+        width: 350px;
+    }
+    .about-project__text{
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 870px){
+    .about-project__title{
+        width: 319px;
+    }
+    .about-project__text{
+        width: 319px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .about-project{
+        padding: 90px 50px;
+    }
+    .about-project__text{
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .about-project__items{
+        margin:70px 0 93px;
+    }
+    .about-project__text{
+        margin-top: 22px;
+    }
+}
+
+@media screen and (max-width: 710px){
+    .about-project__title{
+        width: 250px;
+    }
+    .about-project__text{
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .about-project{
+        padding: 70px 18px;
+    }
+    .about-project__items{
+        flex-direction: column;
+        gap: 56px;
+        margin: 60px 0;
+    }
+    .about-project__header{
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .about-project__title{
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .about-project__text{
+        width: 95%;
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .about-project__text{
+        margin-top: 16px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .about-project__progressbar{
+        grid-template-columns: 2fr 3.8fr;
+    }
+}
