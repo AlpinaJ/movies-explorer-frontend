@@ -3,7 +3,7 @@ import React from "react";
 import Header from "../Header/Header";
 import {Link} from "react-router-dom";
 
-function Profile({username, useremail}) {
+function Profile({onLogout, onSubmit}) {
     const [userName, setUserName] = React.useState("");
     const [userEmail, setUserEmail] = React.useState("");
 
@@ -15,12 +15,13 @@ function Profile({username, useremail}) {
         setUserEmail(e.target.value);
     }
 
+
     return (
         <>
             <Header loggedIn={true}/>
             <main className="profile">
                 <div className="profile__container">
-                    <h1 className="profile__heading">Привет, {username}!</h1>
+                    <h1 className="profile__heading">Привет, {userName}!</h1>
                     <form className="profile__form">
                         <div className="profile__input-container">
                             <label className="profile__lable">Имя</label>
@@ -31,7 +32,7 @@ function Profile({username, useremail}) {
                                 minLength="2"
                                 maxLength="40"
                                 required
-                                value={userName || username}
+                                value={userName || ''}
                                 onChange={handleChangeName}
                             />
                         </div>
@@ -44,15 +45,15 @@ function Profile({username, useremail}) {
                                 minLength="2"
                                 maxLength="40"
                                 required
-                                value={userEmail || useremail}
+                                value={userEmail || ''}
                                 onChange={handleChangeName}
                             />
                         </div>
-                        <button type="submit" className="profile__edit-button">
+                        <button type="submit" onSubmit={onSubmit} className="profile__edit-button">
                             Редактировать
                         </button>
                     </form>
-                    <Link to="/signin" className="profile__logout">
+                    <Link to="/signin" onClick={onLogout} className="profile__logout">
                             Выйти из аккаунта
                     </Link>
                 </div>

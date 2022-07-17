@@ -32,6 +32,13 @@ class Api {
             .then((res) => this._handleResponse(res))
     }
 
+    logout() {
+        console.log("logout in front");
+        return fetch(`${this._url}/signout`, {
+            method: 'POST',
+            credentials: 'include',
+        });
+    }
 
     getUserInfo() {
         return fetch(`${this._url}/users/me`, {

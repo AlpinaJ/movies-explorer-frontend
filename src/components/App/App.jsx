@@ -59,6 +59,19 @@ function App() {
         })
     }
 
+    function handleLogout() {
+        console.log(1);
+        setLoggedIn(false);
+        api.logout().then((res) => {
+            console.log("ga");
+            history('/signin');
+        }).catch((err) => console.log(err));
+    }
+
+    function handleChangeUserInfo(){
+
+    }
+
     function tokenCheck() {
         api.getUserInfo()
             .then((res) => {
@@ -87,8 +100,8 @@ function App() {
                 <Route path="/saved-movies" element={<SavedMovies/>}> </Route>
                 <Route path="/profile" element={
                     <Profile
-                        username={"Виталий"}
-                        useremail={"pochta@yandex.ru"}
+                        onSubmit={handleChangeUserInfo}
+                        onLogout={handleLogout}
                     />
                 }>
                 </Route>
