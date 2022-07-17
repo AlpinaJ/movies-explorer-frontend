@@ -2,7 +2,7 @@ import Form from "../Form/Form";
 import "./Register.css";
 import React from "react";
 
-function Register() {
+function Register({onRegister}) {
     const [email, setEmail] = React.useState("");
     const [name, setName] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -17,6 +17,11 @@ function Register() {
 
     function handleChangePassword(e) {
         setPassword(e.target.value);
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        onRegister({ name, email, password });
     }
 
     return (
@@ -63,6 +68,7 @@ function Register() {
                 button={"Зарегистрироваться"}
                 span={"Уже зарегистрированы?"}
                 isRegister={true}
+                onSubmit = {handleSubmit}
             />
         </main>
     )
