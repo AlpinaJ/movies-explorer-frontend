@@ -8,6 +8,7 @@ class Api {
         if (res.ok) {
             return res.json();
         }
+        console.log(res);
         return Promise.reject(`Error while fetching data: ${res.status}`);
     }
 
@@ -19,6 +20,26 @@ class Api {
             credentials: 'include',
         })
             .then((res) => this._handleResponse(res))
+    }
+
+    login(email, password) {
+        return fetch(`${this._url}/signin`, {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify({email, password   }),
+            credentials: 'include',
+        })
+            .then((res) => this._handleResponse(res))
+    }
+
+
+    getUserInfo() {
+        return fetch(`${this._url}/users/me`, {
+            headers: this._headers,
+            credentials: 'include',
+        }).then((res) =>{
+            return this._handleResponse(res)
+        });
     }
 }
 

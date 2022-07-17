@@ -2,7 +2,7 @@ import Form from "../Form/Form";
 import "./Login.css";
 import React from "react";
 
-function Login() {
+function Login({onLogin}) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
@@ -10,9 +10,13 @@ function Login() {
         setEmail(e.target.value);
     }
 
-
     function handleChangePassword(e) {
         setPassword(e.target.value);
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        onLogin({email,password});
     }
 
     return (
@@ -47,6 +51,7 @@ function Login() {
                 button={"Войти"}
                 span={"Ещё не зарегистрированы?"}
                 isRegister={false}
+                onSubmit={handleSubmit}
             />
         </main>
     )

@@ -16,6 +16,7 @@ import api from "../../utils/MainApi";
 function App() {
     const [status, setStatus] = useState();
     const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
     const history = useNavigate();
 
     function handleRegister({name,email, password}){
@@ -42,6 +43,42 @@ function App() {
         }
     }
 
+    function handleLogin({email, password}) {
+        tokenCheck();
+        return api.login(email, password).then((res) => {
+            if (res['message'] === 'success') {
+                setLoggedIn(true);
+            } else {
+                setStatus(false);
+                setInfoTooltipOpen(true);
+            }
+        }).catch((err) => {
+            setStatus(false);
+            setInfoTooltipOpen(true);
+            console.log(err);
+        })
+    }
+
+    function tokenCheck() {
+        api.getUserInfo()
+            .then((res) => {
+                setLoggedIn(true);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    useEffect(() => {
+        tokenCheck();
+    }, [history]);
+
+    useEffect(()=>{
+        if(loggedIn){
+            history('/movies')
+        }
+    }, [loggedIn])
+
     return (
         <div className="App">
             <Routes>
@@ -55,7 +92,7 @@ function App() {
                     />
                 }>
                 </Route>
-                <Route path="/signin" element={<Login/>}> </Route>
+                <Route path="/signin" element={<Login onLogin={handleLogin}/>}> </Route>
                 <Route path="/signup" element={<Register onRegister={handleRegister}/>}> </Route>
                 <Route path="*" element={<NotFound />} />
             </Routes>
