@@ -29,9 +29,11 @@ function Movies() {
 
     function addMoreFilms() {
         if (isDesktop) {
-            return 3;
+            setMaxMoviesNumber(maxMoviesNumber+3);
         }
-        return 2;
+        else{
+            setMaxMoviesNumber(maxMoviesNumber+2);
+        }
     }
 
 
@@ -43,14 +45,6 @@ function Movies() {
         setMoviesToRender(result);
     }
 
-    function renderMovies(movies) {
-        if (movies === undefined) {
-            getRenderMovies(allMovies);
-        } else {
-            getRenderMovies(movies);
-        }
-
-    }
 
     function handleSearch(keyword) {
         const filterMovies = allMovies.filter((movie) =>
@@ -81,18 +75,22 @@ function Movies() {
     }, [])
 
     React.useEffect(() => {
-        renderMovies();
+        getRenderMovies(allMovies);
     }, [allMovies]);
 
     React.useEffect(() => {
-        if (isShort) {
-            console.log("render short");
-            renderMovies(filteredShortMovies)
-        } else {
-            console.log("render long");
-            renderMovies(filteredLongMovies);
-        }
-    }, [maxMoviesNumber, isShort, filteredLongMovies, filteredShortMovies]);
+       if(filteredShortMovies.length!==0 && isShort){
+           getRenderMovies(filteredShortMovies);
+       }
+       else{
+           if(filteredLongMovies.length!==0){
+               getRenderMovies(filteredLongMovies);
+           }
+           else {
+               getRenderMovies(allMovies);
+           }
+       }
+    }, [maxMoviesNumber, filteredLongMovies, filteredShortMovies, isShort]);
 
     return (
         <>
@@ -104,6 +102,7 @@ function Movies() {
                 <MoviesCardList
                     isSavedMoviesPage={false}
                     isMoreButton={true}
+                    handleMoreButtonClick={addMoreFilms}
                     movies={moviesToRender}
                 />
             </main>

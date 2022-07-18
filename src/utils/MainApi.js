@@ -48,6 +48,18 @@ class Api {
             return this._handleResponse(res)
         });
     }
+
+    patchUserInfo(input) {
+        return fetch(`${this._url}/users/me`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: input.name,
+                email: input.email
+            }),
+            credentials: 'include',
+        }).then((res) => this._handleResponse(res));
+    }
 }
 
 

@@ -18,6 +18,10 @@ function App() {
     const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const history = useNavigate();
+    const [currentUser, setCurrentUser] = useState({
+        "email": "",
+        "name": ""
+    });
 
     function handleRegister({name,email, password}){
         api.register(name, email, password).then((res)=>{
@@ -68,8 +72,12 @@ function App() {
         }).catch((err) => console.log(err));
     }
 
-    function handleChangeUserInfo(){
-
+    function handleChangeUserInfo(user){
+        api.patchUserInfo(user).then((res)=>{
+            setCurrentUser(res);
+        }).catch(err=>{
+            console.log(err);
+        })
     }
 
     function tokenCheck() {
@@ -82,15 +90,21 @@ function App() {
             });
     }
 
+
     useEffect(() => {
         tokenCheck();
     }, [history]);
 
     useEffect(()=>{
         if(loggedIn){
-            history('/movies')
+            api.getUserInfo().then((values)=>{
+                setCurrentUser(values);
+                history('/movies')
+            })
         }
     }, [loggedIn])
+
+
 
     return (
         <div className="App">
@@ -102,6 +116,7 @@ function App() {
                     <Profile
                         onSubmit={handleChangeUserInfo}
                         onLogout={handleLogout}
+                        currentUser={currentUser}
                     />
                 }>
                 </Route>
