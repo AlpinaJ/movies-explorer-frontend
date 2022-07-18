@@ -62,8 +62,15 @@ class Api {
     }
 }
 
+//
+// const api = new Api('http://localhost:3000',
+//     {
+//         // authorization: 'ed992258-c9b2-4aaa-a5d2-85fccb4ac919',
+//         'Content-Type': 'application/json'
+//     });
 
-const api = new Api('http://localhost:3000',
+
+const api = new Api('http:api.AlpinaJ-diplom.nomoredomains.xyz',
     {
         // authorization: 'ed992258-c9b2-4aaa-a5d2-85fccb4ac919',
         'Content-Type': 'application/json'
