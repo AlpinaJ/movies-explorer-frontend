@@ -14,6 +14,7 @@ import "./App.css";
 import api from "../../utils/MainApi";
 
 function App() {
+    console.log(api._url);
     const [status, setStatus] = useState();
     const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
