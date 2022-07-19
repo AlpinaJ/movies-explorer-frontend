@@ -1,6 +1,6 @@
 class Api {
     constructor(url, headers) {
-        this._url = 'http://api.AlpinaJ-diplom.nomoredomains.xyz';
+        this._url = "http://api.AlpinaJ-diplom.nomoredomains.xyz";
         this._headers = headers;
     }
 
@@ -14,7 +14,7 @@ class Api {
 
     register(name, email, password) {
         console.log(email,this._url);
-        return fetch(`${this._url}/signup`, {
+        return fetch(`http://api.AlpinaJ-diplom.nomoredomains.xyz/signup`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({email, password, name}),
