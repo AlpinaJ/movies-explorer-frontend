@@ -14,7 +14,7 @@ class Api {
 
     register(name, email, password) {
         console.log(email,this._url);
-        return fetch(`http://api.AlpinaJ-diplom.nomoredomains.xyz/signup`, {
+        return fetch(`http://api.AlpinaJ-diplom.nomoredomains.xyz:3000/signup`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({email, password, name}),
