@@ -8,12 +8,12 @@ class Api {
         if (res.ok) {
             return res.json();
         }
-        console.log(this._url,res);
+        console.log("here", this._url,res);
         return Promise.reject(`Error while fetching data: ${res.status}`);
     }
 
     register(name, email, password) {
-        console.log(this._url);
+        console.log(email,this._url);
         return fetch(`${this._url}/signup`, {
             method: 'POST',
             headers: this._headers,
