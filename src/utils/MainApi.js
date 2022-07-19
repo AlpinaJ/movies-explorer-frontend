@@ -1,6 +1,6 @@
 class Api {
     constructor(url, headers) {
-        this._url = url;
+        this._url = 'http://api.AlpinaJ-diplom.nomoredomains.xyz';
         this._headers = headers;
     }
 
