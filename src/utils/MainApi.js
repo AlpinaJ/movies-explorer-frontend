@@ -8,7 +8,7 @@ class Api {
         if (res.ok) {
             return res.json();
         }
-        console.log(res);
+        console.log(this._url,res);
         return Promise.reject(`Error while fetching data: ${res.status}`);
     }
 
