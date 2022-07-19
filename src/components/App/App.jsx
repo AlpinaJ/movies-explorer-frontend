@@ -86,7 +86,7 @@ function App() {
                 setLoggedIn(true);
             })
             .catch((err) => {
-                console.log(err);
+                console.log("error1", err);
             });
     }
 
