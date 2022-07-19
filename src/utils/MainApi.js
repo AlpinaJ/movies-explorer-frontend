@@ -13,6 +13,7 @@ class Api {
     }
 
     register(name, email, password) {
+        console.log(this._url);
         return fetch(`${this._url}/signup`, {
             method: 'POST',
             headers: this._headers,
