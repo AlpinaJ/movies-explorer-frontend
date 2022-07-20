@@ -3,8 +3,10 @@ import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList({isSavedMoviesPage, isMoreButton,handleMoreButtonClick, movies}) {
+    console.log(movies);
     return (
         <section className="movies-card-list">
+            {movies !== undefined?(
                     <ul className="movies-card-list__container">
                         {movies.map((movie)=>(
                             <MoviesCard
@@ -15,6 +17,7 @@ function MoviesCardList({isSavedMoviesPage, isMoreButton,handleMoreButtonClick, 
                             />
                         ))}
                     </ul>
+            ):(<ul className="movies-card-list__container"></ul>)}
             {isMoreButton?(
                 <button className="more-button" onClick={handleMoreButtonClick}>Ёще</button>
             ):(
