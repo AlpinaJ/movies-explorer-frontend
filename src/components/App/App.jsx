@@ -12,9 +12,9 @@ import {Routes} from "react-router-dom";
 import InfoToolTip from "../InfoTooltip/InfoTooltip";
 import "./App.css";
 import api from "../../utils/MainApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
-    console.log(api._url);
     const [status, setStatus] = useState();
     const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
@@ -49,7 +49,6 @@ function App() {
     }
 
     function handleLogin({email, password}) {
-        console.log("start login")
         tokenCheck();
         return api.login(email, password).then((res) => {
             if (res['message'] === 'success') {
@@ -66,10 +65,8 @@ function App() {
     }
 
     function handleLogout() {
-        console.log(1);
         setLoggedIn(false);
         api.logout().then((res) => {
-            console.log("ga");
             history('/signin');
         }).catch((err) => console.log(err));
     }
@@ -85,10 +82,10 @@ function App() {
     function tokenCheck() {
         api.getUserInfo()
             .then((res) => {
-                setLoggedIn(true);
+                    setLoggedIn(true);
             })
             .catch((err) => {
-                console.log("error1", err);
+                console.log(err);
             });
     }
 
@@ -99,10 +96,9 @@ function App() {
 
     useEffect(()=>{
         if(loggedIn){
-            console.log("logged in = true in useEffect");
             api.getUserInfo().then((values)=>{
                 setCurrentUser(values);
-                history('/movies')
+                history('/movies');
             })
         }
     }, [loggedIn])
@@ -112,8 +108,10 @@ function App() {
     return (
         <div className="App">
             <Routes>
-                <Route path="/" element={<Main/>}> </Route>
-                <Route path="/movies" element={<Movies/>}> </Route>
+                <Route path="/" element={<Main loggedIn={loggedIn}/>}> </Route>
+                <Route path="/movies" element={<ProtectedRoute isLoggedIn={loggedIn} children={<Movies/>}/>}>
+                </Route>
+
                 <Route path="/saved-movies" element={<SavedMovies/>}> </Route>
                 <Route path="/profile" element={
                     <Profile

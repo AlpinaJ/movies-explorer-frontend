@@ -7,10 +7,10 @@ import Portfolio from "../Protfolio/Portfolio";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-function Main() {
+function Main({loggedIn}) {
     return (
         <>
-            <Header loggedIn={false} isColor={true} isMain={true}/>
+            <Header loggedIn={loggedIn} isColor={true} isMain={true}/>
             <main>
                 <Promo/>
                 <AboutProject/>

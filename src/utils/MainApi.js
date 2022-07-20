@@ -8,12 +8,10 @@ class Api {
         if (res.ok) {
             return res.json();
         }
-        console.log("here",this._url, res);
         return Promise.reject(`Error while fetching data: ${res.status}`);
     }
 
     register(name, email, password) {
-        console.log(email,this._url);
         return fetch(`${this._url}/signup`, {
             method: 'POST',
             headers: this._headers,
@@ -27,14 +25,13 @@ class Api {
         return fetch(`${this._url}/signin`, {
             method: 'POST',
             headers: this._headers,
-            body: JSON.stringify({email, password   }),
+            body: JSON.stringify({email, password}),
             credentials: 'include',
         })
             .then((res) => this._handleResponse(res))
     }
 
     logout() {
-        console.log("logout in front");
         return fetch(`${this._url}/signout`, {
             method: 'POST',
             credentials: 'include',
@@ -71,7 +68,7 @@ class Api {
 //     });
 
 
-const api = new Api('http://api.AlpinaJ-diplom.nomoredomains.xyz',
+const api = new Api('https://api.AlpinaJ-diplom.nomoredomains.xyz',
     {
         // authorization: 'ed992258-c9b2-4aaa-a5d2-85fccb4ac919',
         'Content-Type': 'application/json'
