@@ -49,6 +49,7 @@ function App() {
     }
 
     function handleLogin({email, password}) {
+        console.log("start login")
         tokenCheck();
         return api.login(email, password).then((res) => {
             if (res['message'] === 'success') {
@@ -98,6 +99,7 @@ function App() {
 
     useEffect(()=>{
         if(loggedIn){
+            console.log("logged in = true in useEffect");
             api.getUserInfo().then((values)=>{
                 setCurrentUser(values);
                 history('/movies')
