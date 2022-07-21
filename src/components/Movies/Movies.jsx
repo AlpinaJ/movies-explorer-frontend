@@ -135,15 +135,6 @@ function Movies({handleSaveOrDelete, savedMovies}) {
     }, [allMovies]);
 
     React.useEffect(() => {
-        // if (filteredShortMovies.length !== 0 && isShort) {
-        //     getRenderMovies(filteredShortMovies);
-        // } else {
-        //     if (filteredLongMovies.length !== 0) {
-        //         getRenderMovies(filteredLongMovies);
-        //     } else {
-        //         getRenderMovies(allMovies);
-        //     }
-        // }
         renderMovies();
     }, [maxMoviesNumber, filteredLongMovies, filteredShortMovies, isShort]);
 

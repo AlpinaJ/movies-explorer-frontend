@@ -4,9 +4,12 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList({isSavedMoviesPage, isMoreButton,handleMoreButtonClick, movies, handleClick, savedMovies}) {
     function isMovieInSavedMovies(movie){
-        for(let i=0;i<savedMovies.length;i=i+1){
-            if(savedMovies[i].nameRU===movie.nameRU)
-                return true;
+        console.log(savedMovies);
+        if(savedMovies!==[null]){
+            for(let i=0;i<savedMovies.length;i=i+1){
+                if(savedMovies[i].nameRU===movie.nameRU)
+                    return true;
+            }
         }
         return false;
     }

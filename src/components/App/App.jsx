@@ -25,8 +25,18 @@ function App() {
         "name": "",
         "id":""
     });
-    const [savedMovies, setSavedMovies] = React.useState([]);
+    const savedSavedMovies = ()=>{
+        if( (localStorage.getItem("savedMovies")===null)){
+            return [];
+        }
+        else {
+            return JSON.parse(localStorage.getItem("savedMovies"));
+        }
+    };
 
+    const [savedMovies, setSavedMovies] = React.useState(savedSavedMovies);
+
+    console.log(JSON.stringify(localStorage.getItem("savedMovies")), savedMovies);
     function handleRegister({name, email, password}) {
         api.register(name, email, password).then((res) => {
             if (res.data) {
@@ -116,7 +126,7 @@ function App() {
     const handleMovieDelete = (movieId) => {
         api.deleteMovie(movieId)
             .then(() => {
-                setSavedMovies((state) => state.filter((m) => m._id !== movieId));
+                setSavedMovies((movies) => movies.filter((m) => m._id !== movieId));
             })
             .catch((err) => {
                 console.log(err);
@@ -139,11 +149,10 @@ function App() {
     }, [loggedIn])
 
     useEffect(() => {
-        if(savedMovies.length!==0){
-            const oldSaveMovies = JSON.parse(localStorage.getItem("savedMovies"));
-            localStorage.setItem("savedMovies", JSON.stringify(savedMovies.concat(oldSaveMovies)));
+        if(savedMovies!=="null"){
+            console.log(savedMovies);
+            localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
         }
-
     }, [savedMovies]);
 
 
