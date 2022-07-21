@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
@@ -30,6 +30,12 @@ function SavedMovies({handleDelete, movies}){
         setIsShort(!isShort);
         handleSearch(localStorage.getItem("keyword"));
     }
+
+    // function handleClick(){
+    //     handleDelete();
+    //     movies = JSON.parse(localStorage.getItem("savedMovies"));
+    //     moviesToRender(movies);
+    // }
 
     return(
         <>

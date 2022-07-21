@@ -2,8 +2,7 @@ import React from "react";
 import "./Navigation.css";
 import accountPath from "../../images/account.svg";
 import burgerPath from "../../images/burger.svg";
-import closePath from "../../images/close.svg";
-import {Link, NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import { useMediaPredicate } from "react-media-hook";
 
 function Navigation({isColor, isMain, isMovies, isSavedMovies}) {

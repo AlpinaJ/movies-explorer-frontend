@@ -13,7 +13,11 @@ function Checkbox({checked, onChange}){
     return(
         <div className="checkbox__container">
             <label className="checkbox__label">
-                <input type="checkbox" checked={checked} onChange={handleChange} className="checkbox__default"/>
+                <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={handleChange}
+                    className="checkbox__default"/>
                 <div className="checkbox__checkmark">
                     <div className={checked ?
                         ("checkbox__checkmark-background")

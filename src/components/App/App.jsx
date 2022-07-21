@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
-import SearchForm from "../SearchForm/SearchForm";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
@@ -23,22 +22,19 @@ function App() {
     const [currentUser, setCurrentUser] = useState({
         "email": "",
         "name": "",
-        "id":""
+        "id": ""
     });
-
-    const savedSavedMovies = ()=>{
-        if( (localStorage.getItem("savedMovies")===null)){
+    const savedSavedMovies = () => {
+        if ((localStorage.getItem("savedMovies") === null)) {
             return [];
-        }
-        else {
-            console.log(currentUser.id);
-            return JSON.parse(localStorage.getItem("savedMovies")).filter(movie=>movie.owner===currentUser.id);
+        } else {
+            return JSON.parse(localStorage.getItem("savedMovies"))
+                .filter(movie => movie.owner === currentUser.id);
         }
     };
-
     const [savedMovies, setSavedMovies] = React.useState(savedSavedMovies);
 
-    function setGlobalDefaultStates(){
+    function setGlobalDefaultStates() {
         localStorage.removeItem("longMovies");
         localStorage.removeItem("shortMovies");
         localStorage.removeItem("isShort");
@@ -51,10 +47,9 @@ function App() {
             if (res.data) {
                 setStatus(true);
                 setInfoTooltipOpen(true);
-                handleLogin({email,password}).then((res)=>{
+                handleLogin({email, password}).then((res) => {
                     return res;
                 })
-                // return res;
             } else {
                 setStatus(false);
                 setInfoTooltipOpen(true);
@@ -73,7 +68,6 @@ function App() {
     }
 
     function handleLogin({email, password}) {
-        console.log(email,password);
         tokenCheck();
         return api.login(email, password).then((res) => {
             if (res['message'] === 'success') {
@@ -127,6 +121,7 @@ function App() {
             api.saveMovie(country, director, duration, year, description,
                 image, trailerLink, thumbnail, movieId, nameRU, nameEN)
                 .then((movie) => {
+                    console.log(movie);
                     setSavedMovies([movie, ...savedMovies]);
 
                 })
@@ -142,7 +137,8 @@ function App() {
     const handleMovieDelete = (movieId) => {
         api.deleteMovie(movieId)
             .then(() => {
-                setSavedMovies((movies) => movies.filter((m) => m._id !== movieId));
+                setSavedMovies((movies) =>
+                    movies.filter((m) => m._id !== movieId));
             })
             .catch((err) => {
                 console.log(err);
@@ -164,7 +160,7 @@ function App() {
     }, [loggedIn])
 
     useEffect(() => {
-        if(savedMovies!=="null"){
+        if (savedMovies !== "null") {
             localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
         }
     }, [savedMovies]);
@@ -173,31 +169,60 @@ function App() {
     return (
         <div className="App">
             <Routes>
-                <Route path="/" element={<Main loggedIn={loggedIn}/>}> </Route>
-                <Route path="/movies" element={<ProtectedRoute
-                    isLoggedIn={loggedIn}
-                    children={<Movies handleSaveOrDelete={handleMovieSaveOrDelete} savedMovies={JSON.parse(localStorage.getItem("savedMovies"))}/>}/>}>
+                <Route
+                    path="/"
+                    element={<Main loggedIn={loggedIn}/>}>
                 </Route>
-
-                <Route path="/saved-movies" element={<ProtectedRoute
-                    isLoggedIn={loggedIn} children={<SavedMovies
-                    handleDelete={handleMovieDelete}
-                    movies={savedMovies}
-                />}/>}> </Route>
-                <Route path="/profile" element={<ProtectedRoute
-                    isLoggedIn={loggedIn}
-                    children={<Profile
-                        onSubmit={handleChangeUserInfo}
-                        onLogout={handleLogout}
-                        currentUser={currentUser}
-                    />}/>
-                }>
+                <Route
+                    path="/movies"
+                    element={<ProtectedRoute
+                        isLoggedIn={loggedIn}
+                        children={<Movies
+                            handleSaveOrDelete={handleMovieSaveOrDelete}
+                            savedMovies={JSON.parse(localStorage.getItem("savedMovies"))}/>}
+                    />}
+                >
                 </Route>
-                <Route path="/signin" element={<Login onLogin={handleLogin}/>}> </Route>
-                <Route path="/signup" element={<Register onRegister={handleRegister}/>}> </Route>
-                <Route path="*" element={<NotFound/>}/>
+                <Route
+                    path="/saved-movies"
+                    element={<ProtectedRoute
+                        isLoggedIn={loggedIn}
+                        children={<SavedMovies
+                            handleDelete={handleMovieDelete}
+                            movies={savedMovies}/>}
+                    />}
+                >
+                </Route>
+                <Route
+                    path="/profile"
+                    element={<ProtectedRoute
+                        isLoggedIn={loggedIn}
+                        children={<Profile
+                            onSubmit={handleChangeUserInfo}
+                            onLogout={handleLogout}
+                            currentUser={currentUser}
+                        />}
+                    />
+                    }>
+                </Route>
+                <Route
+                    path="/signin"
+                    element={<Login
+                        onLogin={handleLogin}/>}>
+                </Route>
+                <Route
+                    path="/signup"
+                    element={<Register
+                        onRegister={handleRegister}/>}>
+                </Route>
+                <Route
+                    path="*"
+                    element={<NotFound/>}/>
             </Routes>
-            <InfoToolTip status={status} isOpen={isInfoTooltipOpen} closePopup={handleClose}/>
+            <InfoToolTip
+                status={status}
+                isOpen={isInfoTooltipOpen}
+                closePopup={handleClose}/>
         </div>
     );
 }

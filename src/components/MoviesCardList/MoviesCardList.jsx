@@ -20,7 +20,7 @@ function MoviesCardList({isSavedMoviesPage, isMoreButton,handleMoreButtonClick,
             <p className={movies.length === 0? ("not-found") : ("not-found_hidden")}>
                 Ничего не найдено
             </p>
-            {movies !== undefined?(
+            {movies.length !== 0?(
                     <ul className="movies-card-list__container">
                         {movies.map((movie)=>(
                             <MoviesCard

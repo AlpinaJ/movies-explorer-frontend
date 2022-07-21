@@ -61,6 +61,10 @@
     top:13px;
 }
 
+.card__link{
+    text-decoration: none;
+}
+
 .card__image {
     width: 100%;
     height: auto;

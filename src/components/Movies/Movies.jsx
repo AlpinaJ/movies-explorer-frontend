@@ -5,7 +5,6 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import getMovies from "../../utils/MoviesApi";
 import {useMediaPredicate} from "react-media-hook";
-import {stringToBool} from "../../utils/constants";
 
 function Movies({handleSaveOrDelete, savedMovies}) {
     const isPad = useMediaPredicate("(min-width: 577px)");
@@ -50,7 +49,6 @@ function Movies({handleSaveOrDelete, savedMovies}) {
     }
 
     function addMoreFilms() {
-        // console.log("addMoreFilms");
         if (isBigDesktop) {
             setMaxMoviesNumber(maxMoviesNumber + 4);
         } else {
@@ -80,7 +78,6 @@ function Movies({handleSaveOrDelete, savedMovies}) {
     }
 
     const renderMovies = () => {
-
         if (!isShort) {
             if (filteredLongMovies.length > 0) {
                 getRenderMovies(filteredLongMovies);
