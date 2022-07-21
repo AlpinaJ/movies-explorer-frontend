@@ -167,7 +167,8 @@ function App() {
                 <Route path="/saved-movies" element={<ProtectedRoute
                     isLoggedIn={loggedIn} children={<SavedMovies
                     handleDelete={handleMovieDelete}
-                    movies={JSON.parse(localStorage.getItem("savedMovies"))}
+                    // movies={JSON.parse(localStorage.getItem("savedMovies"))}
+                    movies={savedMovies}
                 />}/>}> </Route>
                 <Route path="/profile" element={<ProtectedRoute
                     isLoggedIn={loggedIn}
