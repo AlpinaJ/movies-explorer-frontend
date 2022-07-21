@@ -3,7 +3,7 @@ import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList({isSavedMoviesPage, isMoreButton,handleMoreButtonClick,
-                            movies, handleClick, savedMovies, notFound}) {
+                            movies, handleClick, savedMovies}) {
     function isMovieInSavedMovies(movie){
         if(savedMovies!==null){
             for(let i=0;i<savedMovies.length;i=i+1){

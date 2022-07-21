@@ -27,7 +27,6 @@ function SavedMovies({handleDelete, movies}){
     }
 
     function handleShortClick() {
-        localStorage.setItem("isShort", String(!isShort));
         setIsShort(!isShort);
         handleSearch(localStorage.getItem("keyword"));
     }

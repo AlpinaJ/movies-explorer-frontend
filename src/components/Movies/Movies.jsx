@@ -18,6 +18,7 @@ function Movies({handleSaveOrDelete, savedMovies}) {
     const [maxMoviesNumber, setMaxMoviesNumber] = React.useState(setInitialMoviesNumber());
     const [isShort, setIsShort] = React.useState(stringToBool(localStorage.getItem('isShort')));
     const [isNotFound, setIsNotFound] = React.useState(false);
+    const [isMore, setIsMore] = React.useState(false);
 
     function stringToBool(string) {
         return string !== "false";
@@ -68,6 +69,14 @@ function Movies({handleSaveOrDelete, savedMovies}) {
             result.push(movies[i]);
         }
         setMoviesToRender(result);
+
+        setTimeout(() => {
+            if (movies.length > maxMoviesNumber) {
+                setIsMore(true);
+            } else {
+                setIsMore(false);
+            }
+        }, 300);
     }
 
     const renderMovies = () => {
@@ -165,7 +174,7 @@ function Movies({handleSaveOrDelete, savedMovies}) {
                 />
                 <MoviesCardList
                     isSavedMoviesPage={false}
-                    isMoreButton={true}
+                    isMoreButton={isMore}
                     handleMoreButtonClick={addMoreFilms}
                     movies={moviesToRender}
                     savedMovies={savedMovies}
