@@ -12,6 +12,7 @@ function MoviesCardList({isSavedMoviesPage, isMoreButton,handleMoreButtonClick, 
         }
         return false;
     }
+
     return (
         <section className="movies-card-list">
             {movies !== undefined?(

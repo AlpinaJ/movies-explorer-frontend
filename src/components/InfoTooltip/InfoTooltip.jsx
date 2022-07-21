@@ -11,7 +11,7 @@ function InfoToolTip({isOpen, closePopup, status}){
                 <button className="popup__button-close" type="button" onClick={closePopup}></button>
                 <img className="popup__status-image" src={status? successImage:failImage}
                      alt={status? "Ок":"Ошибка"}/>
-                <p className="popup__status-text">{status ? "Вы успешно зарегистрировались!"
+                <p className="popup__status-text">{status ? "Успешно!"
                     : "Что-то пошло не так! Попробуйте ещё раз."}</p>
             </div>
         </div>

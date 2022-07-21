@@ -43,6 +43,7 @@ function App() {
         localStorage.removeItem("shortMovies");
         localStorage.removeItem("isShort");
         localStorage.removeItem("savedMovies");
+        localStorage.removeItem("keyword");
     }
 
     function handleRegister({name, email, password}) {
@@ -50,7 +51,10 @@ function App() {
             if (res.data) {
                 setStatus(true);
                 setInfoTooltipOpen(true);
-                return res;
+                handleLogin({email,password}).then((res)=>{
+                    return res;
+                })
+                // return res;
             } else {
                 setStatus(false);
                 setInfoTooltipOpen(true);
@@ -64,17 +68,18 @@ function App() {
     function handleClose() {
         setInfoTooltipOpen(false);
         if (status) {
-            history('/signin');
+            history('/movies');
         }
     }
 
     function handleLogin({email, password}) {
-        // localStorage.removeItem("movies");
-        // setGlobalDefaultStates();
+        console.log(email,password);
         tokenCheck();
         return api.login(email, password).then((res) => {
             if (res['message'] === 'success') {
                 setLoggedIn(true);
+                setStatus(true);
+                setInfoTooltipOpen(true);
             } else {
                 setStatus(false);
                 setInfoTooltipOpen(true);

@@ -2,7 +2,6 @@ import React from "react";
 import "./Checkbox.css";
 
 function Checkbox({checked, onChange}){
-    console.log("checkbox", checked);
 
     function handleChange(){
         const background = document.querySelector(".checkbox__checkmark-background");
