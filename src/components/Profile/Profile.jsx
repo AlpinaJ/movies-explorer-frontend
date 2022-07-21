@@ -8,13 +8,14 @@ function Profile({onLogout, onSubmit, currentUser}) {
     const [userName, setUserName] = React.useState("");
     const [userEmail, setUserEmail] = React.useState("");
 
-
     function handleChangeName(e) {
-        setUserName(e.target.value);
+        const input = e.target;
+        setUserName(input.value);
     }
 
     function handleChangeEmail(e) {
-        setUserEmail(e.target.value);
+        const input = e.target;
+        setUserEmail(input.value);
     }
 
     function handleSubmit(e){
@@ -27,6 +28,15 @@ function Profile({onLogout, onSubmit, currentUser}) {
         setUserEmail(currentUser.email);
     }, [currentUser]);
 
+    React.useEffect(() => {
+        const editButton = document.querySelector(".profile__edit-button");
+        if((userName !== currentUser.name) || (userEmail !== currentUser.email)){
+            editButton.classList.remove("profile__edit-button_disabled");
+        }
+        else{
+            editButton.classList.add("profile__edit-button_disabled");
+        }
+    }, [currentUser, userName, userEmail]);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -61,7 +71,9 @@ function Profile({onLogout, onSubmit, currentUser}) {
                                 onChange={handleChangeEmail}
                             />
                         </div>
-                        <button type="submit" onSubmit={onSubmit} className="profile__edit-button">
+                        <button type="submit"
+                                onSubmit={onSubmit}
+                                className="profile__edit-button profile__edit-button_disabled">
                             Редактировать
                         </button>
                     </form>
