@@ -26,6 +26,7 @@ function Movies({handleSaveOrDelete, savedMovies}) {
     function setDefaultStates() {
         setMaxMoviesNumber(setInitialMoviesNumber);
         setMoviesToRender([]);
+        setIsNotFound(false);
         localStorage.removeItem("longMovies");
         localStorage.removeItem("shortMovies");
     }
@@ -169,6 +170,7 @@ function Movies({handleSaveOrDelete, savedMovies}) {
                     movies={moviesToRender}
                     savedMovies={savedMovies}
                     handleClick={handleSaveOrDelete}
+                    notFound={isNotFound}
                 />
             </main>
             <Footer/>

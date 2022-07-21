@@ -2,7 +2,8 @@ import React from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList({isSavedMoviesPage, isMoreButton,handleMoreButtonClick, movies, handleClick, savedMovies}) {
+function MoviesCardList({isSavedMoviesPage, isMoreButton,handleMoreButtonClick,
+                            movies, handleClick, savedMovies, notFound}) {
     function isMovieInSavedMovies(movie){
         if(savedMovies!==null){
             for(let i=0;i<savedMovies.length;i=i+1){
@@ -15,6 +16,10 @@ function MoviesCardList({isSavedMoviesPage, isMoreButton,handleMoreButtonClick, 
 
     return (
         <section className="movies-card-list">
+
+            <p className={movies.length === 0? ("not-found") : ("not-found_hidden")}>
+                Ничего не найдено
+            </p>
             {movies !== undefined?(
                     <ul className="movies-card-list__container">
                         {movies.map((movie)=>(
