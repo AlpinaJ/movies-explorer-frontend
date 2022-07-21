@@ -121,7 +121,6 @@ function App() {
             api.saveMovie(country, director, duration, year, description,
                 image, trailerLink, thumbnail, movieId, nameRU, nameEN)
                 .then((movie) => {
-                    console.log(movie);
                     setSavedMovies([movie, ...savedMovies]);
 
                 })
