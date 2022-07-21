@@ -1,6 +1,7 @@
 import React from "react";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
 import "./MoviesCard.css";
+import { minutesToHours } from "../../utils/constants";
 
 function MoviesCard({movie, isSaved, isSavedMoviesPage, handleCLick}) {
     const [isInSaved, setIsInSaved] = React.useState(isSaved);
@@ -33,7 +34,7 @@ function MoviesCard({movie, isSaved, isSavedMoviesPage, handleCLick}) {
                      alt={movie.nameRU} className="card__image"/>
                 <div className="card__info">
                     <h4 className="card__name">{movie.nameRU}</h4>
-                    <p className="card__duration">{movie.duration}</p>
+                    <p className="card__duration">{minutesToHours(movie.duration)}</p>
                     {isSavedMoviesPage?
                         (<button type="button" className="card__button card__button_delete"
                                  onClick={handleCardClick}></button>)

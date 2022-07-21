@@ -25,16 +25,25 @@ function App() {
         "name": "",
         "id":""
     });
+
     const savedSavedMovies = ()=>{
         if( (localStorage.getItem("savedMovies")===null)){
             return [];
         }
         else {
-            return JSON.parse(localStorage.getItem("savedMovies"));
+            console.log(currentUser.id);
+            return JSON.parse(localStorage.getItem("savedMovies")).filter(movie=>movie.owner===currentUser.id);
         }
     };
 
     const [savedMovies, setSavedMovies] = React.useState(savedSavedMovies);
+
+    function setGlobalDefaultStates(){
+        localStorage.removeItem("longMovies");
+        localStorage.removeItem("shortMovies");
+        localStorage.removeItem("isShort");
+        localStorage.removeItem("savedMovies");
+    }
 
     function handleRegister({name, email, password}) {
         api.register(name, email, password).then((res) => {
@@ -60,6 +69,8 @@ function App() {
     }
 
     function handleLogin({email, password}) {
+        // localStorage.removeItem("movies");
+        // setGlobalDefaultStates();
         tokenCheck();
         return api.login(email, password).then((res) => {
             if (res['message'] === 'success') {
@@ -78,6 +89,7 @@ function App() {
     function handleLogout() {
         setLoggedIn(false);
         api.logout().then((res) => {
+            setGlobalDefaultStates();
             history('/signin');
         }).catch((err) => console.log(err));
     }
@@ -140,7 +152,6 @@ function App() {
     useEffect(() => {
         if (loggedIn) {
             api.getUserInfo().then((values) => {
-                console.log(values);
                 setCurrentUser(values);
                 history('/movies');
             })
@@ -148,7 +159,6 @@ function App() {
     }, [loggedIn])
 
     useEffect(() => {
-        console.log(savedMovies);
         if(savedMovies!=="null"){
             localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
         }
@@ -167,7 +177,6 @@ function App() {
                 <Route path="/saved-movies" element={<ProtectedRoute
                     isLoggedIn={loggedIn} children={<SavedMovies
                     handleDelete={handleMovieDelete}
-                    // movies={JSON.parse(localStorage.getItem("savedMovies"))}
                     movies={savedMovies}
                 />}/>}> </Route>
                 <Route path="/profile" element={<ProtectedRoute

@@ -25,7 +25,6 @@ function Movies({handleSaveOrDelete, savedMovies}) {
     function setDefaultStates() {
         setMaxMoviesNumber(setInitialMoviesNumber);
         setMoviesToRender([]);
-        localStorage.removeItem("movies");
         localStorage.removeItem("longMovies");
         localStorage.removeItem("shortMovies");
     }
@@ -77,8 +76,14 @@ function Movies({handleSaveOrDelete, savedMovies}) {
             } else if (filteredLongMovies.length === 0 && localStorage.getItem("longMovies")) {
                 getRenderMovies(getItemFromLocalStorage("longMovies"));
             } else {
-                setIsNotFound(true);
-                setMoviesToRender([]);
+                if(getItemFromLocalStorage("keyword")==null){
+                    setMoviesToRender(allMovies.filter((movie) =>
+                        movie.duration > 40))
+                }
+                else{
+                    setIsNotFound(true);
+                    setMoviesToRender([]);
+                }
             }
         } else if (filteredShortMovies.length > 0) {
             getRenderMovies(filteredShortMovies);
@@ -86,8 +91,15 @@ function Movies({handleSaveOrDelete, savedMovies}) {
         } else if (filteredShortMovies.length === 0 && localStorage.getItem("shortMovies")) {
             getRenderMovies(getItemFromLocalStorage("shortMovies"));
         } else {
-            setIsNotFound(true);
-            setMoviesToRender([]);
+            if(getItemFromLocalStorage("keyword")==null){
+                setMoviesToRender(allMovies.filter((movie) =>
+                    movie.duration <= 40))
+            }
+            else{
+                setIsNotFound(true);
+                setMoviesToRender([]);
+            }
+
         }
     };
 
@@ -117,6 +129,10 @@ function Movies({handleSaveOrDelete, savedMovies}) {
         if (allMovies.length === 0) {
             getMovies().then((movies) => {
                 setAllMovies(movies);
+                setFilteredShortMovies(allMovies.filter((movie) =>
+                    movie.duration <= 40));
+                setFilteredLongMovies(allMovies.filter((movie) =>
+                    movie.duration > 40));
             })
                 .catch((err) => {
                     console.log(err);
@@ -129,8 +145,6 @@ function Movies({handleSaveOrDelete, savedMovies}) {
             getRenderMovies(getItemFromLocalStorage("shortMovies"))
         } else if (!isShort && localStorage.getItem("longMovies")) {
             getRenderMovies(getItemFromLocalStorage("longMovies"))
-        } else {
-            getRenderMovies(allMovies);
         }
     }, [allMovies]);
 
