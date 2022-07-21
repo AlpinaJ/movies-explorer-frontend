@@ -4,8 +4,7 @@ import "./SearchForm.css";
 import findImagePath from "../../images/find.svg";
 
 function SearchForm({onSearch, checked, onCheckClick}){
-    const [keyword, setKeyword] = React.useState("");
-
+    const [keyword, setKeyword] = React.useState(localStorage.getItem("keyword"));
     function handleKeywordChange(e){
         setKeyword(e.target.value);
     }
@@ -24,6 +23,7 @@ function SearchForm({onSearch, checked, onCheckClick}){
                            className="search-form__input"
                            required
                            onChange={handleKeywordChange}
+                           value={keyword}
                     />
                     <button type="submit" value=" " className="search-form__submit">
                         <img  src={findImagePath} className="search-form__image" alt="Поиск"/>

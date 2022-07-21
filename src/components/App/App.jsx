@@ -1,4 +1,4 @@
-import React, {useState, useEffect}  from "react";
+import React, {useState, useEffect} from "react";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SearchForm from "../SearchForm/SearchForm";
@@ -13,6 +13,7 @@ import InfoToolTip from "../InfoTooltip/InfoTooltip";
 import "./App.css";
 import api from "../../utils/MainApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import getMovies from "../../utils/MoviesApi";
 
 function App() {
     const [status, setStatus] = useState();
@@ -21,17 +22,18 @@ function App() {
     const history = useNavigate();
     const [currentUser, setCurrentUser] = useState({
         "email": "",
-        "name": ""
+        "name": "",
+        "id":""
     });
+    const [savedMovies, setSavedMovies] = React.useState([]);
 
-    function handleRegister({name,email, password}){
-        api.register(name, email, password).then((res)=>{
-            if (res.data){
+    function handleRegister({name, email, password}) {
+        api.register(name, email, password).then((res) => {
+            if (res.data) {
                 setStatus(true);
                 setInfoTooltipOpen(true);
                 return res;
-            }
-            else {
+            } else {
                 setStatus(false);
                 setInfoTooltipOpen(true);
             }
@@ -41,7 +43,7 @@ function App() {
         })
     }
 
-    function handleClose(){
+    function handleClose() {
         setInfoTooltipOpen(false);
         if (status) {
             history('/signin');
@@ -71,59 +73,106 @@ function App() {
         }).catch((err) => console.log(err));
     }
 
-    function handleChangeUserInfo(user){
-        api.patchUserInfo(user).then((res)=>{
+    function handleChangeUserInfo(user) {
+        api.patchUserInfo(user).then((res) => {
             setCurrentUser(res);
-        }).catch(err=>{
+        }).catch(err => {
             console.log(err);
         })
     }
 
     function tokenCheck() {
-        api.getUserInfo()
+        Promise.all([api.getUserInfo(), getMovies()])
             .then((res) => {
-                    setLoggedIn(true);
+                setLoggedIn(true);
             })
             .catch((err) => {
                 console.log(err);
             });
     }
 
+    function handleMovieSaveOrDelete({
+                                         country, director, duration, year, description,
+                                         image, trailerLink, thumbnail, movieId, nameRU,
+                                         nameEN
+                                     }) {
+        const isSaved = savedMovies.some((i) => i.nameRU === nameRU);
+        if (!isSaved) {
+            api.saveMovie(country, director, duration, year, description,
+                image, trailerLink, thumbnail, movieId, nameRU, nameEN)
+                .then((movie) => {
+                    setSavedMovies([movie, ...savedMovies]);
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        } else {
+            const movieToDelete = savedMovies.find((i) => i.nameRU === nameRU);
+            handleMovieDelete(movieToDelete._id);
+        }
+    }
+
+    const handleMovieDelete = (movieId) => {
+        api.deleteMovie(movieId)
+            .then(() => {
+                setSavedMovies((state) => state.filter((m) => m._id !== movieId));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
 
     useEffect(() => {
         tokenCheck();
     }, [history]);
 
-    useEffect(()=>{
-        if(loggedIn){
-            api.getUserInfo().then((values)=>{
+    useEffect(() => {
+        if (loggedIn) {
+            api.getUserInfo().then((values) => {
+                console.log(values);
                 setCurrentUser(values);
                 history('/movies');
             })
         }
     }, [loggedIn])
 
+    useEffect(() => {
+        if(savedMovies.length!==0){
+            const oldSaveMovies = JSON.parse(localStorage.getItem("savedMovies"));
+            localStorage.setItem("savedMovies", JSON.stringify(savedMovies.concat(oldSaveMovies)));
+        }
+
+    }, [savedMovies]);
 
 
     return (
         <div className="App">
             <Routes>
                 <Route path="/" element={<Main loggedIn={loggedIn}/>}> </Route>
-                <Route path="/movies" element={<ProtectedRoute isLoggedIn={loggedIn} children={<Movies/>}/>}>
+                <Route path="/movies" element={<ProtectedRoute
+                    isLoggedIn={loggedIn}
+                    children={<Movies handleSaveOrDelete={handleMovieSaveOrDelete} savedMovies={JSON.parse(localStorage.getItem("savedMovies"))}/>}/>}>
                 </Route>
 
-                <Route path="/saved-movies" element={<SavedMovies/>}> </Route>
-                <Route path="/profile" element={
-                    <Profile
+                <Route path="/saved-movies" element={<ProtectedRoute
+                    isLoggedIn={loggedIn} children={<SavedMovies
+                    handleDelete={handleMovieDelete}
+                    movies={JSON.parse(localStorage.getItem("savedMovies"))}
+                />}/>}> </Route>
+                <Route path="/profile" element={<ProtectedRoute
+                    isLoggedIn={loggedIn}
+                    children={<Profile
                         onSubmit={handleChangeUserInfo}
                         onLogout={handleLogout}
                         currentUser={currentUser}
-                    />
+                    />}/>
                 }>
                 </Route>
                 <Route path="/signin" element={<Login onLogin={handleLogin}/>}> </Route>
                 <Route path="/signup" element={<Register onRegister={handleRegister}/>}> </Route>
-                <Route path="*" element={<NotFound />} />
+                <Route path="*" element={<NotFound/>}/>
             </Routes>
             <InfoToolTip status={status} isOpen={isInfoTooltipOpen} closePopup={handleClose}/>
         </div>

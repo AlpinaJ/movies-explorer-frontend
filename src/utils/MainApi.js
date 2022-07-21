@@ -42,7 +42,7 @@ class Api {
         return fetch(`${this._url}/users/me`, {
             headers: this._headers,
             credentials: 'include',
-        }).then((res) =>{
+        }).then((res) => {
             return this._handleResponse(res)
         });
     }
@@ -56,7 +56,44 @@ class Api {
                 email: input.email
             }),
             credentials: 'include',
-        }).then((res) => this._handleResponse(res));
+        }).then((res) => {
+            return this._handleResponse(res)
+        });
+    }
+
+    saveMovie(country, director, duration, year, description, image, trailerLink,
+              thumbnail, movieId, nameRU, nameEN) {
+
+        return fetch(`${this._url}/movies`, {
+            method: "POST",
+            headers: this._headers,
+            body: JSON.stringify({
+                country,
+                director,
+                duration,
+                year,
+                description,
+                image,
+                trailerLink,
+                movieId,
+                nameRU,
+                nameEN,
+                thumbnail,
+            }),
+            credentials: 'include',
+        }).then((res) => {
+            return this._handleResponse(res)
+        });
+    }
+
+    deleteMovie(movieId) {
+        return fetch(`${this._url}/movies/${movieId}`, {
+            method: "DELETE",
+            headers: this._headers,
+            credentials: 'include',
+        }).then((res) => {
+            return this._handleResponse(res)
+        });
     }
 }
 
