@@ -2,26 +2,29 @@ import React from "react";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
 import "./MoviesCard.css";
 
-function MoviesCard({movie,isSaved, isSavedMoviesPage, handleCLick}) {
+function MoviesCard({movie, isSaved, isSavedMoviesPage, handleCLick}) {
     const [isInSaved, setIsInSaved] = React.useState(isSaved);
 
     function handleCardClick() {
         if (!isSavedMoviesPage) {
             setIsInSaved(!isInSaved);
+            handleCLick({
+                nameRU: movie.nameRU || movie.nameEN,
+                image: `https://api.nomoreparties.co${movie.image.url}`,
+                trailerLink: movie.trailerLink,
+                duration: movie.duration,
+                country: movie.country || "",
+                director: movie.director || "",
+                year: movie.year,
+                description: movie.description,
+                thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+                movieId: movie.id.toString(),
+                nameEN: movie.nameEN || "",
+            });
         }
-        handleCLick({
-            nameRU: movie.nameRU || movie.nameEN,
-            image: `https://api.nomoreparties.co${movie.image.url}`,
-            trailerLink: movie.trailerLink,
-            duration: movie.duration,
-            country: movie.country || "",
-            director: movie.director || "",
-            year: movie.year,
-            description: movie.description,
-            thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
-            movieId: movie.id.toString(),
-            nameEN: movie.nameEN || "",
-        });
+        else {
+            handleCLick(movie._id)
+        }
     }
 
     return (

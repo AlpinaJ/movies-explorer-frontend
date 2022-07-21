@@ -36,7 +36,6 @@ function App() {
 
     const [savedMovies, setSavedMovies] = React.useState(savedSavedMovies);
 
-    console.log(JSON.stringify(localStorage.getItem("savedMovies")), savedMovies);
     function handleRegister({name, email, password}) {
         api.register(name, email, password).then((res) => {
             if (res.data) {
@@ -149,8 +148,8 @@ function App() {
     }, [loggedIn])
 
     useEffect(() => {
+        console.log(savedMovies);
         if(savedMovies!=="null"){
-            console.log(savedMovies);
             localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
         }
     }, [savedMovies]);
