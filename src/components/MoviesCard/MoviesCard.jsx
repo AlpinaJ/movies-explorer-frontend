@@ -14,13 +14,13 @@ function MoviesCard({movie, isSaved, isSavedMoviesPage, handleCLick}) {
                 image: `https://api.nomoreparties.co${movie.image.url}`,
                 trailerLink: movie.trailerLink,
                 duration: movie.duration,
-                country: movie.country || "",
-                director: movie.director || "",
+                country: movie.country || "null",
+                director: movie.director || "null",
                 year: movie.year,
                 description: movie.description,
                 thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
                 movieId: movie.id.toString(),
-                nameEN: movie.nameEN || "",
+                nameEN: movie.nameEN || "null",
             });
         }
         else {

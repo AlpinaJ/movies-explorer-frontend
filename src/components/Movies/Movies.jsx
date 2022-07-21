@@ -48,7 +48,7 @@ function Movies({handleSaveOrDelete, savedMovies}) {
     }
 
     function addMoreFilms() {
-        console.log("addMoreFilms");
+        // console.log("addMoreFilms");
         if (isBigDesktop) {
             setMaxMoviesNumber(maxMoviesNumber + 4);
         } else {
