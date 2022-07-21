@@ -10,3 +10,6 @@ export function minutesToHours(min){
     return `${hours}ч${minutes}м`;
 }
 
+export  function stringToBool(string) {
+    return string !== "false";
+}

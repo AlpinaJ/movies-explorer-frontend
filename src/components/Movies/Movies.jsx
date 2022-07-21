@@ -5,6 +5,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import getMovies from "../../utils/MoviesApi";
 import {useMediaPredicate} from "react-media-hook";
+import {stringToBool} from "../../utils/constants";
 
 function Movies({handleSaveOrDelete, savedMovies}) {
     const isPad = useMediaPredicate("(min-width: 577px)");
@@ -78,7 +79,7 @@ function Movies({handleSaveOrDelete, savedMovies}) {
             } else {
                 if(getItemFromLocalStorage("keyword")==null){
                     setMoviesToRender(allMovies.filter((movie) =>
-                        movie.duration > 40))
+                        movie.duration <= 40))
                 }
                 else{
                     setIsNotFound(true);
