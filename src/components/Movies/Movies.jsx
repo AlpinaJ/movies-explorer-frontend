@@ -30,10 +30,6 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
         setIsNotFound(false);
     }
 
-    function getItemFromLocalStorage(item) {
-        return JSON.parse(localStorage.getItem(item));
-    }
-
     function setInitialMoviesNumber() {
         if (isBigDesktop) {
             return 12;
@@ -66,7 +62,6 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
             result.push(movies[i]);
         }
         setMoviesToRender(result);
-        console.log(result);
         setIsNotFound(result.length===0);
 
         setTimeout(() => {
@@ -102,7 +97,6 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
 
     function renderMovies() {
         const keyword = localStorage.getItem("keyword");
-        console.log(keyword);
         if (isShort && keyword!=="null") {
             getRenderMovies(filteredShortMovies);
         }
@@ -113,7 +107,6 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
             getRenderMovies(filteredMovies);
         }
         if (!isShort && keyword==="null") {
-            console.log("all");
             getRenderMovies(allMovies);
         }
     }
@@ -138,7 +131,7 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
                 <SearchForm onSearch={handleSearch}
                             checked={isShort}
                             onCheckClick={handleShortClick}
-                            needKeyword={true}
+                            initialKeyword={localStorage.getItem("keyword")}
                 />
                 <MoviesCardList
                     isSavedMoviesPage={false}

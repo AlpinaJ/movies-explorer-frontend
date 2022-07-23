@@ -11,27 +11,79 @@ function SavedMovies({handleDelete, movies}){
         (movies.filter((movie)=>movie.duration<=40)):
         (movies);
     const [moviesToRender, setMoviesToRender]=React.useState(initialSavedMovies);
+    const [shortMovies, setShortMovies] = React.useState(movies.filter((movie)=>movie.duration<=40));
+    const [filteredMovies, setFilteredMovies] = React.useState([]);
+    const [filteredShortMovies, setFilteredShortMovies] = React.useState([]);
+    const [isNotFound, setIsNotFound] = React.useState(false);
+    const [savedMoviesKeyword, setSavedMoviesKeyword]=React.useState("");
+
+    function setDefaultStates() {
+        setMoviesToRender([]);
+        setIsNotFound(false);
+    }
 
     function handleSearch(keyword){
-        let filteredMovies =  movies.filter((movie) => movie.nameRU.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
-        if(isShort){
-            setMoviesToRender(filteredMovies.filter((movie) => movie.duration<=40));
+        setFilteredShortMovies([]);
+        setFilteredMovies([]);
+        let filterMovies = movies;
+        if (keyword !== "" && keyword!==null) {
+            filterMovies = movies.filter((movie) =>
+                movie.nameRU.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
         }
-        else{
-            setMoviesToRender(filteredMovies);
-        }
-
+        setFilteredShortMovies(filterMovies.filter((movie) => movie.duration <= 40));
+        setFilteredMovies(filterMovies);
+        setSavedMoviesKeyword(keyword);
+        localStorage.setItem("keyword", keyword);
     }
 
     function handleShortClick() {
+        localStorage.setItem("isShort", String(!isShort));
         setIsShort(!isShort);
-        handleSearch(localStorage.getItem("keyword"));
+    }
+
+    function getRenderMovies(movies){
+        setMoviesToRender(movies);
+        setIsNotFound(movies.length===0 );
+    }
+
+    function renderMovies() {
+        if (isShort && filteredShortMovies.length!==0) {
+            getRenderMovies(filteredShortMovies);
+        }
+        if (isShort && filteredShortMovies.length===0) {
+            if(savedMoviesKeyword!=="") {
+                getRenderMovies([])
+            }
+            else{
+                getRenderMovies(shortMovies);
+            }
+        }
+        if (!isShort && filteredMovies.length!==0) {
+            getRenderMovies(filteredMovies);
+        }
+        if (!isShort && filteredMovies.length===0) {
+            if(savedMoviesKeyword!=="") {
+                getRenderMovies([])
+            }
+            else{
+                getRenderMovies(movies);
+            }
+        }
     }
 
     function handleClick(id){
        handleDelete(id);
        setMoviesToRender(moviesToRender.filter((movie)=>movie._id!==id));
     }
+
+    React.useEffect(() => {
+        renderMovies();
+    }, [isShort, filteredMovies, filteredShortMovies]);
+
+    // React.useEffect(()=>{
+    //         renderMovies();
+    // }, [])
+
 
     return(
         <>
@@ -41,7 +93,7 @@ function SavedMovies({handleDelete, movies}){
                     onSearch={handleSearch}
                     checked={isShort}
                     onCheckClick={handleShortClick}
-                    needKeyword={false}
+                    initialKeyword={""}
                 />
                 <MoviesCardList
                     isSavedMoviesPage={true}

@@ -3,8 +3,8 @@ import Checkbox from "../Checkbox/Chekbox";
 import "./SearchForm.css";
 import findImagePath from "../../images/find.svg";
 
-function SearchForm({onSearch, checked, onCheckClick, needKeyword}){
-    const [keyword, setKeyword] = React.useState(localStorage.getItem("keyword"));
+function SearchForm({onSearch, checked, onCheckClick, initialKeyword}){
+    const [keyword, setKeyword] = React.useState(initialKeyword);
     function handleKeywordChange(e){
         setKeyword(e.target.value);
     }
@@ -22,7 +22,7 @@ function SearchForm({onSearch, checked, onCheckClick, needKeyword}){
                            placeholder="Фильм"
                            className="search-form__input"
                            onChange={handleKeywordChange}
-                           value={(needKeyword && keyword!=="null")?(keyword):("")}
+                           value={(keyword!=="null")?(keyword):("")}
                     />
                     <button type="submit" value=" " className="search-form__submit">
                         <img  src={findImagePath} className="search-form__image" alt="Поиск"/>
