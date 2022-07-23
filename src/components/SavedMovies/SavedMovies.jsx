@@ -9,7 +9,7 @@ function SavedMovies({handleDelete, movies}){
     const [isShort, setIsShort] = React.useState(stringToBool(localStorage.getItem('isShort')));
     const initialSavedMovies = isShort ?
         (movies.filter((movie)=>movie.duration<=40)):
-        (movies.filter((movie)=>movie.duration>40));
+        (movies);
     const [moviesToRender, setMoviesToRender]=React.useState(initialSavedMovies);
 
     function handleSearch(keyword){
@@ -31,11 +31,10 @@ function SavedMovies({handleDelete, movies}){
         handleSearch(localStorage.getItem("keyword"));
     }
 
-    // function handleClick(){
-    //     handleDelete();
-    //     movies = JSON.parse(localStorage.getItem("savedMovies"));
-    //     moviesToRender(movies);
-    // }
+    function handleClick(id){
+       handleDelete(id);
+       setMoviesToRender(moviesToRender.filter((movie)=>movie._id!==id));
+    }
 
     return(
         <>
@@ -51,7 +50,7 @@ function SavedMovies({handleDelete, movies}){
                     isMoreButton={false}
                     savedMovies={movies}
                     movies={moviesToRender}
-                    handleClick={handleDelete}
+                    handleClick={handleClick}
                 />
             </main>
             <Footer/>

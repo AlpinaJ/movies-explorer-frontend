@@ -3,11 +3,9 @@ import "./MoviesCard.css";
 import {minutesToHours} from "../../utils/constants";
 
 function MoviesCard({movie, isSaved, isSavedMoviesPage, handleCLick}) {
-    const [isInSaved, setIsInSaved] = React.useState(isSaved);
 
     function handleCardClick() {
         if (!isSavedMoviesPage) {
-            setIsInSaved(!isInSaved);
             handleCLick({
                 nameRU: movie.nameRU || movie.nameEN,
                 image: `https://api.nomoreparties.co${movie.image.url}`,
@@ -43,7 +41,7 @@ function MoviesCard({movie, isSaved, isSavedMoviesPage, handleCLick}) {
                 {isSavedMoviesPage ?
                     (<button type="button" className="card__button card__button_delete"
                              onClick={handleCardClick}></button>)
-                    : (isInSaved ?
+                    : (isSaved ?
                         (<button type="button"
                                  className="card__button card__button_saved"
                                  onClick={handleCardClick}></button>)
