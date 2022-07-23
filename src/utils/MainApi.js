@@ -61,6 +61,14 @@ class Api {
         });
     }
 
+    getMovies() {
+        return fetch(`${this._url}/movies`, {
+            method: "GET",
+            headers: this._headers,
+            credentials: 'include',
+        }).then(this._handleResponse);
+    }
+
     saveMovie(country, director, duration, year, description, image, trailerLink,
               thumbnail, movieId, nameRU, nameEN) {
 

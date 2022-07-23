@@ -15,6 +15,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import getMovies from "../../utils/MoviesApi";
 
 function App() {
+    const [allMovies, setAllMovies] = useState([]);
     const [status, setStatus] = useState();
     const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
@@ -104,6 +105,8 @@ function App() {
     function tokenCheck() {
         Promise.all([api.getUserInfo(), getMovies()])
             .then((res) => {
+                setCurrentUser(res[0]);
+                setAllMovies(res[1]);
                 setLoggedIn(true);
             })
             .catch((err) => {
@@ -158,6 +161,22 @@ function App() {
         }
     }, [loggedIn])
 
+    React.useEffect(() => {
+        if (loggedIn) {
+            api.getMovies()
+                .then((movies) => {
+                    console.log(movies.data)
+                    const moviesToShow = movies.data.filter((movie)=> movie.owner===currentUser.id);
+                    console.log(moviesToShow, currentUser);
+                    setSavedMovies(moviesToShow);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+        console.log("saved",savedMovies);
+    }, [loggedIn])
+
     useEffect(() => {
         if (savedMovies !== "null") {
             localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
@@ -178,7 +197,9 @@ function App() {
                         isLoggedIn={loggedIn}
                         children={<Movies
                             handleSaveOrDelete={handleMovieSaveOrDelete}
-                            savedMovies={JSON.parse(localStorage.getItem("savedMovies"))}/>}
+                            allMovies={allMovies}
+                            savedMovies={JSON.parse(localStorage.getItem("savedMovies"))}
+                        />}
                     />}
                 >
                 </Route>

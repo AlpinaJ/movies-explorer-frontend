@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
@@ -6,12 +6,12 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import getMovies from "../../utils/MoviesApi";
 import {useMediaPredicate} from "react-media-hook";
 
-function Movies({handleSaveOrDelete, savedMovies}) {
+function Movies({handleSaveOrDelete,allMovies, savedMovies}) {
     const isPad = useMediaPredicate("(min-width: 577px)");
     const isDesktop = useMediaPredicate("(min-width: 985px)");
     const isBigDesktop = useMediaPredicate("(min-width: 1257px)");
-    const [allMovies, setAllMovies] = React.useState([]);
-    const [filteredLongMovies, setFilteredLongMovies] = React.useState([]);
+    const [shortMovies, setShortMovies] = React.useState([]);
+    const [filteredMovies, setFilteredMovies] = React.useState([]);
     const [filteredShortMovies, setFilteredShortMovies] = React.useState([]);
     const [moviesToRender, setMoviesToRender] = React.useState([]);
     const [maxMoviesNumber, setMaxMoviesNumber] = React.useState(setInitialMoviesNumber());
@@ -27,7 +27,7 @@ function Movies({handleSaveOrDelete, savedMovies}) {
         setMaxMoviesNumber(setInitialMoviesNumber);
         setMoviesToRender([]);
         setIsNotFound(false);
-        localStorage.removeItem("longMovies");
+        localStorage.removeItem("movies");
         localStorage.removeItem("shortMovies");
     }
 
@@ -77,55 +77,24 @@ function Movies({handleSaveOrDelete, savedMovies}) {
         }, 300);
     }
 
-    const renderMovies = () => {
-        if (!isShort) {
-            if (filteredLongMovies.length > 0) {
-                getRenderMovies(filteredLongMovies);
-                setIsNotFound(false);
-            } else if (filteredLongMovies.length === 0 && localStorage.getItem("longMovies")) {
-                getRenderMovies(getItemFromLocalStorage("longMovies"));
-            } else {
-                if(getItemFromLocalStorage("keyword")==null){
-                    setMoviesToRender(allMovies.filter((movie) =>
-                        movie.duration <= 40))
-                }
-                else{
-                    setIsNotFound(true);
-                    setMoviesToRender([]);
-                }
-            }
-        } else if (filteredShortMovies.length > 0) {
-            getRenderMovies(filteredShortMovies);
-            setIsNotFound(false);
-        } else if (filteredShortMovies.length === 0 && localStorage.getItem("shortMovies")) {
-            getRenderMovies(getItemFromLocalStorage("shortMovies"));
-        } else {
-            if(getItemFromLocalStorage("keyword")==null){
-                setMoviesToRender(allMovies.filter((movie) =>
-                    movie.duration <= 40))
-            }
-            else{
-                setIsNotFound(true);
-                setMoviesToRender([]);
-            }
-
-        }
-    };
-
+    React.useEffect(()=>{
+        setShortMovies(allMovies.filter((movie)=>movie.duration<=40));
+        renderMovies();
+    },[allMovies])
 
     function handleSearch(keyword) {
-        setDefaultStates();
-        const filterMovies = allMovies.filter((movie) =>
-            movie.nameRU.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
-        const shortFilterMovies = filterMovies.filter((movie) =>
-            movie.duration <= 40);
-        const longFilterMovies = filterMovies.filter((movie) =>
-            movie.duration > 40);
-        setFilteredShortMovies(shortFilterMovies);
-        setFilteredLongMovies(longFilterMovies);
-        localStorage.setItem("keyword", keyword);
-        localStorage.setItem("longMovies", JSON.stringify(longFilterMovies));
-        localStorage.setItem("shortMovies", JSON.stringify(shortFilterMovies));
+        // setDefaultStates();
+        // const filterMovies = allMovies.filter((movie) =>
+        //     movie.nameRU.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
+        // const shortFilterMovies = filterMovies.filter((movie) =>
+        //     movie.duration <= 40);
+        // const longFilterMovies = filterMovies.filter((movie) =>
+        //     movie.duration > 40);
+        // setFilteredShortMovies(shortFilterMovies);
+        // setFilteredLongMovies(longFilterMovies);
+        // localStorage.setItem("keyword", keyword);
+        // localStorage.setItem("longMovies", JSON.stringify(longFilterMovies));
+        // localStorage.setItem("shortMovies", JSON.stringify(shortFilterMovies));
     }
 
     function handleShortClick() {
@@ -133,33 +102,18 @@ function Movies({handleSaveOrDelete, savedMovies}) {
         setIsShort(!isShort);
     }
 
-
-    React.useEffect(() => {
-        if (allMovies.length === 0) {
-            getMovies().then((movies) => {
-                setAllMovies(movies);
-                setFilteredShortMovies(allMovies.filter((movie) =>
-                    movie.duration <= 40));
-                setFilteredLongMovies(allMovies.filter((movie) =>
-                    movie.duration > 40));
-            })
-                .catch((err) => {
-                    console.log(err);
-                })
+    function renderMovies(){
+        if(isShort){
+            getRenderMovies(shortMovies);
         }
-    }, [allMovies])
-
-    React.useEffect(() => {
-        if (isShort && localStorage.getItem("shortMovies")) {
-            getRenderMovies(getItemFromLocalStorage("shortMovies"))
-        } else if (!isShort && localStorage.getItem("longMovies")) {
-            getRenderMovies(getItemFromLocalStorage("longMovies"))
+        else{
+            getRenderMovies(allMovies);
         }
-    }, [allMovies]);
+    }
 
     React.useEffect(() => {
         renderMovies();
-    }, [maxMoviesNumber, filteredLongMovies, filteredShortMovies, isShort]);
+    }, [maxMoviesNumber]);
 
     return (
         <>
