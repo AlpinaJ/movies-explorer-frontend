@@ -65,7 +65,6 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
         for (let i = 0; i < maxMoviesNumber && i < movies.length; i = i + 1) {
             result.push(movies[i]);
         }
-        console.log(movies, result);
         setMoviesToRender(result);
 
         setTimeout(() => {
@@ -85,7 +84,7 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
     function handleSearch(keyword) {
         setDefaultStates();
         let filterMovies = allMovies;
-        if (keyword !== "") {
+        if (keyword !== "" && keyword!==null) {
             filterMovies = allMovies.filter((movie) =>
                 movie.nameRU.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
         }

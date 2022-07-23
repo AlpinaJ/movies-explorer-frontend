@@ -28,11 +28,8 @@ function App() {
         "id": ""
     });
 
-    function setGlobalDefaultStates() {
-        localStorage.removeItem("longMovies");
-        localStorage.removeItem("shortMovies");
+    function setDefaultStates() {
         localStorage.removeItem("isShort");
-        localStorage.removeItem("savedMovies");
         localStorage.removeItem("keyword");
     }
 
@@ -87,7 +84,7 @@ function App() {
             "id": ""
         })
         api.logout().then((res) => {
-            setGlobalDefaultStates();
+            setDefaultStates();
             history('/signin');
         }).catch((err) => console.log(err));
     }
