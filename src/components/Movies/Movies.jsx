@@ -113,7 +113,7 @@ function Movies({handleSaveOrDelete,allMovies, savedMovies}) {
 
     React.useEffect(() => {
         renderMovies();
-    }, [maxMoviesNumber]);
+    }, [maxMoviesNumber, isShort]);
 
     return (
         <>
