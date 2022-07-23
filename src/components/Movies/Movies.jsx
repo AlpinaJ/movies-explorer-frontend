@@ -5,6 +5,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import getMovies from "../../utils/MoviesApi";
 import {useMediaPredicate} from "react-media-hook";
+import {keyboard} from "@testing-library/user-event/dist/keyboard";
 
 function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
     const isPad = useMediaPredicate("(min-width: 577px)");
@@ -64,6 +65,7 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
         for (let i = 0; i < maxMoviesNumber && i < movies.length; i = i + 1) {
             result.push(movies[i]);
         }
+        console.log(movies, result);
         setMoviesToRender(result);
 
         setTimeout(() => {
@@ -98,7 +100,6 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
     }
 
     function renderMovies() {
-
         if (isShort && filteredShortMovies.length !== 0) {
             getRenderMovies(filteredShortMovies);
         }
@@ -114,12 +115,17 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
     }
 
     React.useEffect(() => {
-        if (localStorage.getItem("keyword") !== "" && filteredShortMovies.length===0) {
-            handleSearch(localStorage.getItem("keyword"))
-        } else {
+        renderMovies();
+    }, [maxMoviesNumber, isShort, filteredMovies, filteredShortMovies]);
+
+    React.useEffect(()=>{
+        if(localStorage.getItem("keyword")!==""){
+            handleSearch(localStorage.getItem("keyword"));
+        }
+        else{
             renderMovies();
         }
-    }, [maxMoviesNumber, isShort, filteredMovies, filteredShortMovies]);
+    }, [])
 
     return (
         <>
