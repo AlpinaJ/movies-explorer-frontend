@@ -171,12 +171,6 @@ function App() {
     }, [loggedIn])
 
 
-    // useEffect(() => {
-    //     if (savedMovies !== "null") {
-    //         localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
-    //     }
-    // }, [savedMovies]);
-
 
     return (
         <CurrentUserContext.Provider value={currentUser}>

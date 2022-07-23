@@ -6,7 +6,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import getMovies from "../../utils/MoviesApi";
 import {useMediaPredicate} from "react-media-hook";
 
-function Movies({handleSaveOrDelete,allMovies, savedMovies}) {
+function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
     const isPad = useMediaPredicate("(min-width: 577px)");
     const isDesktop = useMediaPredicate("(min-width: 985px)");
     const isBigDesktop = useMediaPredicate("(min-width: 1257px)");
@@ -27,8 +27,6 @@ function Movies({handleSaveOrDelete,allMovies, savedMovies}) {
         setMaxMoviesNumber(setInitialMoviesNumber);
         setMoviesToRender([]);
         setIsNotFound(false);
-        localStorage.removeItem("movies");
-        localStorage.removeItem("shortMovies");
     }
 
     function getItemFromLocalStorage(item) {
@@ -77,24 +75,21 @@ function Movies({handleSaveOrDelete,allMovies, savedMovies}) {
         }, 300);
     }
 
-    React.useEffect(()=>{
-        setShortMovies(allMovies.filter((movie)=>movie.duration<=40));
+    React.useEffect(() => {
+        setShortMovies(allMovies.filter((movie) => movie.duration <= 40));
         renderMovies();
-    },[allMovies])
+    }, [allMovies])
 
     function handleSearch(keyword) {
-        // setDefaultStates();
-        // const filterMovies = allMovies.filter((movie) =>
-        //     movie.nameRU.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
-        // const shortFilterMovies = filterMovies.filter((movie) =>
-        //     movie.duration <= 40);
-        // const longFilterMovies = filterMovies.filter((movie) =>
-        //     movie.duration > 40);
-        // setFilteredShortMovies(shortFilterMovies);
-        // setFilteredLongMovies(longFilterMovies);
-        // localStorage.setItem("keyword", keyword);
-        // localStorage.setItem("longMovies", JSON.stringify(longFilterMovies));
-        // localStorage.setItem("shortMovies", JSON.stringify(shortFilterMovies));
+        setDefaultStates();
+        let filterMovies = allMovies;
+        if (keyword !== "") {
+            filterMovies = allMovies.filter((movie) =>
+                movie.nameRU.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
+        }
+        setFilteredShortMovies(filterMovies.filter((movie) => movie.duration <= 40));
+        setFilteredMovies(filterMovies);
+        localStorage.setItem("keyword", keyword);
     }
 
     function handleShortClick() {
@@ -102,18 +97,29 @@ function Movies({handleSaveOrDelete,allMovies, savedMovies}) {
         setIsShort(!isShort);
     }
 
-    function renderMovies(){
-        if(isShort){
+    function renderMovies() {
+
+        if (isShort && filteredShortMovies.length !== 0) {
+            getRenderMovies(filteredShortMovies);
+        }
+        if (isShort && filteredShortMovies.length === 0) {
             getRenderMovies(shortMovies);
         }
-        else{
+        if (!isShort && filteredMovies.length !== 0) {
+            getRenderMovies(filteredMovies);
+        }
+        if (!isShort && filteredMovies.length === 0) {
             getRenderMovies(allMovies);
         }
     }
 
     React.useEffect(() => {
-        renderMovies();
-    }, [maxMoviesNumber, isShort]);
+        if (localStorage.getItem("keyword") !== "" && filteredShortMovies.length===0) {
+            handleSearch(localStorage.getItem("keyword"))
+        } else {
+            renderMovies();
+        }
+    }, [maxMoviesNumber, isShort, filteredMovies, filteredShortMovies]);
 
     return (
         <>

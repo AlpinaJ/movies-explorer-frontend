@@ -21,7 +21,6 @@ function SearchForm({onSearch, checked, onCheckClick}){
                     <input type="search"
                            placeholder="Фильм"
                            className="search-form__input"
-                           required
                            onChange={handleKeywordChange}
                            value={keyword}
                     />
