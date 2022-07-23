@@ -66,6 +66,8 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
             result.push(movies[i]);
         }
         setMoviesToRender(result);
+        console.log(result);
+        setIsNotFound(result.length===0);
 
         setTimeout(() => {
             if (movies.length > maxMoviesNumber) {
@@ -99,16 +101,19 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
     }
 
     function renderMovies() {
-        if (isShort && filteredShortMovies.length !== 0) {
+        const keyword = localStorage.getItem("keyword");
+        console.log(keyword);
+        if (isShort && keyword!=="null") {
             getRenderMovies(filteredShortMovies);
         }
-        if (isShort && filteredShortMovies.length === 0) {
+        if (isShort && keyword==="null") {
             getRenderMovies(shortMovies);
         }
-        if (!isShort && filteredMovies.length !== 0) {
+        if (!isShort && keyword!=="null") {
             getRenderMovies(filteredMovies);
         }
-        if (!isShort && filteredMovies.length === 0) {
+        if (!isShort && keyword==="null") {
+            console.log("all");
             getRenderMovies(allMovies);
         }
     }
@@ -133,6 +138,7 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
                 <SearchForm onSearch={handleSearch}
                             checked={isShort}
                             onCheckClick={handleShortClick}
+                            needKeyword={true}
                 />
                 <MoviesCardList
                     isSavedMoviesPage={false}

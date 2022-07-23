@@ -13,15 +13,12 @@ function SavedMovies({handleDelete, movies}){
     const [moviesToRender, setMoviesToRender]=React.useState(initialSavedMovies);
 
     function handleSearch(keyword){
+        let filteredMovies =  movies.filter((movie) => movie.nameRU.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
         if(isShort){
-            let result =  movies.filter((movie) => movie.nameRU.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
-            result = result.filter((movie) => movie.duration>40);
-            setMoviesToRender(result);
+            setMoviesToRender(filteredMovies.filter((movie) => movie.duration<=40));
         }
         else{
-            let result =  movies.filter((movie) => movie.nameRU.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
-            result= result.filter((movie) => movie.duration<=40);
-            setMoviesToRender(result);
+            setMoviesToRender(filteredMovies);
         }
 
     }
@@ -44,6 +41,7 @@ function SavedMovies({handleDelete, movies}){
                     onSearch={handleSearch}
                     checked={isShort}
                     onCheckClick={handleShortClick}
+                    needKeyword={false}
                 />
                 <MoviesCardList
                     isSavedMoviesPage={true}
