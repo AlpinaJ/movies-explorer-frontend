@@ -1,12 +1,15 @@
 import "./Profile.css";
 import React from "react";
 import Header from "../Header/Header";
-import {Link} from "react-router-dom";
-import { CurrentUserContext } from '../../context/CurrentUserContext';
+import {Link, useNavigate} from "react-router-dom";
+import {CurrentUserContext} from '../../context/CurrentUserContext';
+import InfoToolTip from "../InfoTooltip/InfoTooltip";
 
 function Profile({onLogout, onSubmit, currentUser}) {
     const [userName, setUserName] = React.useState("");
     const [userEmail, setUserEmail] = React.useState("");
+    const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+    const history = useNavigate();
 
     function handleChangeName(e) {
         const input = e.target;
@@ -18,9 +21,15 @@ function Profile({onLogout, onSubmit, currentUser}) {
         setUserEmail(input.value);
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault();
-        onSubmit({email:userEmail,name:userName});
+        onSubmit({email: userEmail, name: userName});
+        setIsInfoTooltipOpen(true);
+    }
+
+    function handleClose() {
+        setIsInfoTooltipOpen(false);
+        history('/profile');
     }
 
     React.useEffect(() => {
@@ -30,10 +39,9 @@ function Profile({onLogout, onSubmit, currentUser}) {
 
     React.useEffect(() => {
         const editButton = document.querySelector(".profile__edit-button");
-        if((userName !== currentUser.name) || (userEmail !== currentUser.email)){
+        if ((userName !== currentUser.name) || (userEmail !== currentUser.email)) {
             editButton.classList.remove("profile__edit-button_disabled");
-        }
-        else{
+        } else {
             editButton.classList.add("profile__edit-button_disabled");
         }
     }, [currentUser, userName, userEmail]);
@@ -78,9 +86,13 @@ function Profile({onLogout, onSubmit, currentUser}) {
                         </button>
                     </form>
                     <Link to="/signin" onClick={onLogout} className="profile__logout">
-                            Выйти из аккаунта
+                        Выйти из аккаунта
                     </Link>
                 </div>
+                <InfoToolTip
+                    status={true}
+                    isOpen={isInfoTooltipOpen}
+                    closePopup={handleClose}/>
             </main>
         </CurrentUserContext.Provider>
     )

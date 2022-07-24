@@ -65,6 +65,7 @@ function App() {
                 setLoggedIn(true);
                 setStatus(true);
                 setInfoTooltipOpen(true);
+                history('/movies');
             } else {
                 setStatus(false);
                 setInfoTooltipOpen(true);
@@ -159,14 +160,13 @@ function App() {
         if (loggedIn) {
             api.getUserInfo().then((values) => {
                 setCurrentUser(values);
-                history('/movies');
+                // history('/movies');
             }).catch((err) => {
                 console.log(err);
             });
 
         }
     }, [loggedIn])
-
 
 
     return (
