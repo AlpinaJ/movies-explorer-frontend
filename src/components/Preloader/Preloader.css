@@ -51,11 +51,11 @@
 
 .preloader__round::after {
     background: white;
-    animation: preloader-animation 1s ease infinite;
+    animation: preloader-animation 0.5s ease infinite;
 }
 
 .preloader__round::before {
     background: black;
-    animation: preloader-animation 1s ease infinite 0.4s;
+    animation: preloader-animation 0.5s ease infinite 0.1s;
     z-index: 3;
 }
