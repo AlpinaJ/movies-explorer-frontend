@@ -3,7 +3,6 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import getMovies from "../../utils/MoviesApi";
 import {useMediaPredicate} from "react-media-hook";
 import {initialMoviesNumberBigDesktop,
         initialMoviesNumberDesktop,

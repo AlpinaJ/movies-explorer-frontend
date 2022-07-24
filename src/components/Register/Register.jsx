@@ -6,17 +6,23 @@ function Register({onRegister}) {
     const [email, setEmail] = React.useState("");
     const [name, setName] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [isValidName, setIsValidName] = React.useState(false);
+    const [isValidEmail, setIsValidEmail] = React.useState(false);
+    const [isValidPassword, setIsValidPassword] = React.useState(false);
 
     function handleChangeEmail(e) {
         setEmail(e.target.value);
+        setIsValidEmail(e.target.validity.valid);
     }
 
     function handleChangeName(e) {
         setName(e.target.value);
+        setIsValidName(e.target.validity.valid);
     }
 
     function handleChangePassword(e) {
         setPassword(e.target.value);
+        setIsValidPassword(e.target.validity.valid);
     }
 
     function handleSubmit(e){
@@ -69,6 +75,7 @@ function Register({onRegister}) {
                 span={"Уже зарегистрированы?"}
                 isRegister={true}
                 onSubmit = {handleSubmit}
+                isValid={isValidName && isValidEmail && isValidPassword}
             />
         </main>
     )

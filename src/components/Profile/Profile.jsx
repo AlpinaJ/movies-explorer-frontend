@@ -8,17 +8,21 @@ import InfoToolTip from "../InfoTooltip/InfoTooltip";
 function Profile({onLogout, onSubmit, currentUser}) {
     const [userName, setUserName] = React.useState("");
     const [userEmail, setUserEmail] = React.useState("");
+    const [isValidName, setIsValidName] = React.useState(true);
+    const [isValidEmail, setIsValidEmail] = React.useState(true);
     const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
     const history = useNavigate();
 
     function handleChangeName(e) {
         const input = e.target;
         setUserName(input.value);
+        setIsValidName(e.target.validity.valid);
     }
 
     function handleChangeEmail(e) {
         const input = e.target;
         setUserEmail(input.value);
+        setIsValidEmail(e.target.validity.valid);
     }
 
     function handleSubmit(e) {
@@ -39,12 +43,13 @@ function Profile({onLogout, onSubmit, currentUser}) {
 
     React.useEffect(() => {
         const editButton = document.querySelector(".profile__edit-button");
-        if ((userName !== currentUser.name) || (userEmail !== currentUser.email)) {
+        if (((userName !== currentUser.name) || (userEmail !== currentUser.email))
+            &&isValidName && isValidEmail){
             editButton.classList.remove("profile__edit-button_disabled");
         } else {
             editButton.classList.add("profile__edit-button_disabled");
         }
-    }, [currentUser, userName, userEmail]);
+    }, [currentUser, userName, userEmail, isValidEmail, isValidName]);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>

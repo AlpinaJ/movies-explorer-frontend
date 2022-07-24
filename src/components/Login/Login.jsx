@@ -5,13 +5,17 @@ import React from "react";
 function Login({onLogin}) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [isValidEmail, setIsValidEmail] = React.useState(false);
+    const [isValidPassword, setIsValidPassword] = React.useState(false);
 
     function handleChangeEmail(e) {
         setEmail(e.target.value);
+        setIsValidEmail(e.target.validity.valid);
     }
 
     function handleChangePassword(e) {
         setPassword(e.target.value);
+        setIsValidPassword(e.target.validity.valid);
     }
 
     function handleSubmit(e){
@@ -52,6 +56,7 @@ function Login({onLogin}) {
                 span={"Ещё не зарегистрированы?"}
                 isRegister={false}
                 onSubmit={handleSubmit}
+                isValid={isValidEmail && isValidPassword}
             />
         </main>
     )
