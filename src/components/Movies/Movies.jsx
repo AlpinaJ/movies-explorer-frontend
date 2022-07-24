@@ -5,7 +5,14 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import getMovies from "../../utils/MoviesApi";
 import {useMediaPredicate} from "react-media-hook";
-import {keyboard} from "@testing-library/user-event/dist/keyboard";
+import {initialMoviesNumberBigDesktop,
+        initialMoviesNumberDesktop,
+        initialMoviesNumberPad,
+        initialMoviesNumberMobile,
+        addMoviesNumberBigDesktop,
+        addMoviesNumberDesktop,
+        addMoviesNumberDefault,
+        shortMovieDuration} from "../../utils/constants";
 
 function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
     const isPad = useMediaPredicate("(min-width: 577px)");
@@ -33,25 +40,25 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
 
     function setInitialMoviesNumber() {
         if (isBigDesktop) {
-            return 12;
+            return initialMoviesNumberBigDesktop;
         }
         if (isDesktop) {
-            return 9;
+            return initialMoviesNumberDesktop;
         }
         if (isPad) {
-            return 8;
+            return initialMoviesNumberPad;
         }
-        return 5;
+        return initialMoviesNumberMobile;
     }
 
     function addMoreFilms() {
         if (isBigDesktop) {
-            setMaxMoviesNumber(maxMoviesNumber + 4);
+            setMaxMoviesNumber(maxMoviesNumber + addMoviesNumberBigDesktop);
         } else {
             if (isDesktop) {
-                setMaxMoviesNumber(maxMoviesNumber + 3);
+                setMaxMoviesNumber(maxMoviesNumber + addMoviesNumberDesktop);
             } else {
-                setMaxMoviesNumber(maxMoviesNumber + 2);
+                setMaxMoviesNumber(maxMoviesNumber + addMoviesNumberDefault);
             }
         }
     }
@@ -75,7 +82,7 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
     }
 
     React.useEffect(() => {
-        setShortMovies(allMovies.filter((movie) => movie.duration <= 40));
+        setShortMovies(allMovies.filter((movie) => movie.duration <= shortMovieDuration));
         renderMovies();
     }, [allMovies])
 
@@ -87,7 +94,7 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
             filterMovies = allMovies.filter((movie) =>
                 movie.nameRU.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
         }
-        setFilteredShortMovies(filterMovies.filter((movie) => movie.duration <= 40));
+        setFilteredShortMovies(filterMovies.filter((movie) => movie.duration <= shortMovieDuration));
         setFilteredMovies(filterMovies);
         localStorage.setItem("keyword", keyword);
     }
