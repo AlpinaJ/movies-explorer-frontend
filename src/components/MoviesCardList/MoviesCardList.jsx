@@ -1,9 +1,10 @@
 import React from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import Preloader from "../Preloader/Preloader";
 
 function MoviesCardList({isSavedMoviesPage, isMoreButton,handleMoreButtonClick,
-                            movies, handleClick, savedMovies}) {
+                            movies, handleClick, savedMovies, preloaderIsVisible}) {
     function isMovieInSavedMovies(movie){
         if(savedMovies.length!==0){
             for(let i=0;i<savedMovies.length;i=i+1){
@@ -17,7 +18,7 @@ function MoviesCardList({isSavedMoviesPage, isMoreButton,handleMoreButtonClick,
 
     return (
         <section className="movies-card-list">
-
+            <Preloader isVisible={preloaderIsVisible}/>
             <p className={movies.length === 0? ("not-found") : ("not-found_hidden")}>
                 Ничего не найдено
             </p>

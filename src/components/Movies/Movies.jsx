@@ -19,6 +19,7 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
     const [isShort, setIsShort] = React.useState(stringToBool(localStorage.getItem('isShort')));
     const [isNotFound, setIsNotFound] = React.useState(false);
     const [isMore, setIsMore] = React.useState(false);
+    const [preloaderIsVisible, setPreloaderIsVisible] = React.useState(false);
 
     function stringToBool(string) {
         return string !== "false";
@@ -80,6 +81,7 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
 
     function handleSearch(keyword) {
         setDefaultStates();
+        setPreloaderIsVisible(true);
         let filterMovies = allMovies;
         if (keyword !== "" && keyword!==null) {
             filterMovies = allMovies.filter((movie) =>
@@ -96,6 +98,7 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
     }
 
     function renderMovies() {
+        setPreloaderIsVisible(false);
         const keyword = localStorage.getItem("keyword");
         const emptyKeyword = (keyword==="" ||keyword==="null")
         if (isShort && !emptyKeyword) {
@@ -142,6 +145,7 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
                     savedMovies={savedMovies}
                     handleClick={handleSaveOrDelete}
                     notFound={isNotFound}
+                    preloaderIsVisible={preloaderIsVisible}
                 />
             </main>
             <Footer/>
