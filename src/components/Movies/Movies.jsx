@@ -97,17 +97,17 @@ function Movies({handleSaveOrDelete, allMovies, savedMovies}) {
 
     function renderMovies() {
         const keyword = localStorage.getItem("keyword");
-        if (isShort && keyword!=="") {
+        const emptyKeyword = (keyword==="" ||keyword==="null")
+        if (isShort && !emptyKeyword) {
             getRenderMovies(filteredShortMovies);
         }
-        if (isShort && keyword==="") {
+        if (isShort && emptyKeyword) {
             getRenderMovies(shortMovies);
         }
-        if (!isShort && keyword!=="") {
+        if (!isShort && !emptyKeyword) {
             getRenderMovies(filteredMovies);
         }
-        if (!isShort && keyword==="") {
-            console.log(allMovies);
+        if (!isShort && emptyKeyword) {
             getRenderMovies(allMovies);
         }
     }
