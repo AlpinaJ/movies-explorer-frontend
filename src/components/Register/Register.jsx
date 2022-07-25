@@ -1,6 +1,7 @@
 import Form from "../Form/Form";
 import "./Register.css";
 import React from "react";
+import validator from "validator";
 
 function Register({onRegister}) {
     const [email, setEmail] = React.useState("");
@@ -12,7 +13,7 @@ function Register({onRegister}) {
 
     function handleChangeEmail(e) {
         setEmail(e.target.value);
-        setIsValidEmail(e.target.validity.valid);
+        setIsValidEmail(e.target.validity.valid && validator.isEmail(e.target.value));
     }
 
     function handleChangeName(e) {

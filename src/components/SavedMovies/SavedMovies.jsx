@@ -7,16 +7,14 @@ import {stringToBool} from "../../utils/constants";
 import {shortMovieDuration} from "../../utils/constants";
 
 function SavedMovies({handleDelete, movies}){
-    const [isShort, setIsShort] = React.useState(stringToBool(localStorage.getItem('isShort')));
-    const initialSavedMovies = isShort ?
-        (movies.filter((movie)=>movie.duration<=shortMovieDuration)):
-        (movies);
-    const [moviesToRender, setMoviesToRender]=React.useState(initialSavedMovies);
+    const [isShort, setIsShort] = React.useState(true);
+    const [moviesToRender, setMoviesToRender]=React.useState(movies.filter((movie)=>movie.duration<=shortMovieDuration));
     const [shortMovies, setShortMovies] = React.useState(movies.filter((movie)=>movie.duration<=shortMovieDuration));
     const [filteredMovies, setFilteredMovies] = React.useState([]);
     const [filteredShortMovies, setFilteredShortMovies] = React.useState([]);
     const [isNotFound, setIsNotFound] = React.useState(false);
     const [savedMoviesKeyword, setSavedMoviesKeyword]=React.useState("");
+    const [keyword,setKeyword] = React.useState("");
 
     function setDefaultStates() {
         setMoviesToRender([]);
@@ -34,11 +32,9 @@ function SavedMovies({handleDelete, movies}){
         setFilteredShortMovies(filterMovies.filter((movie) => movie.duration <= shortMovieDuration));
         setFilteredMovies(filterMovies);
         setSavedMoviesKeyword(keyword);
-        localStorage.setItem("keyword", keyword);
     }
 
     function handleShortClick() {
-        localStorage.setItem("isShort", String(!isShort));
         setIsShort(!isShort);
     }
 

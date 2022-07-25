@@ -1,6 +1,7 @@
 import Form from "../Form/Form";
 import "./Login.css";
 import React from "react";
+import validator from "validator";
 
 function Login({onLogin}) {
     const [email, setEmail] = React.useState("");
@@ -10,7 +11,7 @@ function Login({onLogin}) {
 
     function handleChangeEmail(e) {
         setEmail(e.target.value);
-        setIsValidEmail(e.target.validity.valid);
+        setIsValidEmail(e.target.validity.valid && validator.isEmail(e.target.value));
     }
 
     function handleChangePassword(e) {

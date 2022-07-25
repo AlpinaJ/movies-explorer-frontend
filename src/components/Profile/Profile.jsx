@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import {Link, useNavigate} from "react-router-dom";
 import {CurrentUserContext} from '../../context/CurrentUserContext';
 import InfoToolTip from "../InfoTooltip/InfoTooltip";
+import validator from "validator";
 
 function Profile({onLogout, onSubmit, currentUser}) {
     const [userName, setUserName] = React.useState("");
@@ -22,7 +23,7 @@ function Profile({onLogout, onSubmit, currentUser}) {
     function handleChangeEmail(e) {
         const input = e.target;
         setUserEmail(input.value);
-        setIsValidEmail(e.target.validity.valid);
+        setIsValidEmail(e.target.validity.valid && validator.isEmail(e.target.value));
     }
 
     function handleSubmit(e) {

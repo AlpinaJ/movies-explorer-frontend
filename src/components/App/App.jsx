@@ -14,6 +14,7 @@ import api from "../../utils/MainApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import getMovies from "../../utils/MoviesApi";
 import {CurrentUserContext} from "../../context/CurrentUserContext";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
     const [allMovies, setAllMovies] = useState([]);
@@ -21,6 +22,7 @@ function App() {
     const [status, setStatus] = useState();
     const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
+    const [preloaderIsVisible, setPreloaderIsVisible] = React.useState(false);
     const history = useNavigate();
     const [currentUser, setCurrentUser] = useState({
         "email": "",
@@ -151,7 +153,6 @@ function App() {
             });
     };
 
-
     useEffect(() => {
         tokenCheck();
     }, [history]);
@@ -160,7 +161,6 @@ function App() {
         if (loggedIn) {
             api.getUserInfo().then((values) => {
                 setCurrentUser(values);
-                // history('/movies');
             }).catch((err) => {
                 console.log(err);
             });
