@@ -1,22 +1,34 @@
 import Form from "../Form/Form";
 import "./Register.css";
 import React from "react";
+import validator from "validator";
 
-function Register() {
+function Register({onRegister}) {
     const [email, setEmail] = React.useState("");
     const [name, setName] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [isValidName, setIsValidName] = React.useState(false);
+    const [isValidEmail, setIsValidEmail] = React.useState(false);
+    const [isValidPassword, setIsValidPassword] = React.useState(false);
 
     function handleChangeEmail(e) {
         setEmail(e.target.value);
+        setIsValidEmail(e.target.validity.valid && validator.isEmail(e.target.value));
     }
 
     function handleChangeName(e) {
         setName(e.target.value);
+        setIsValidName(e.target.validity.valid);
     }
 
     function handleChangePassword(e) {
         setPassword(e.target.value);
+        setIsValidPassword(e.target.validity.valid);
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        onRegister({ name, email, password });
     }
 
     return (
@@ -63,6 +75,8 @@ function Register() {
                 button={"Зарегистрироваться"}
                 span={"Уже зарегистрированы?"}
                 isRegister={true}
+                onSubmit = {handleSubmit}
+                isValid={isValidName && isValidEmail && isValidPassword}
             />
         </main>
     )

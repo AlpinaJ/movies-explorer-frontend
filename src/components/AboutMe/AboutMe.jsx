@@ -32,7 +32,9 @@ function AboutMe(){
 
                     </ul>
                 </div>
-                <img src={profilePath} className="about-me__photo" alt="Мое фото"/>
+                <img src={profilePath}
+                     className="about-me__photo"
+                     alt="Мое фото"/>
             </div>
         </section>
     )
