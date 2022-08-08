@@ -60,3 +60,14 @@
     height: 16px;
     top:13px;
 }
+
+.card__link{
+    text-decoration: none;
+}
+
+.card__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 364/203;
+    object-fit: cover;
+}

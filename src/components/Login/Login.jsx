@@ -1,18 +1,27 @@
 import Form from "../Form/Form";
 import "./Login.css";
 import React from "react";
+import validator from "validator";
 
-function Login() {
+function Login({onLogin}) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [isValidEmail, setIsValidEmail] = React.useState(false);
+    const [isValidPassword, setIsValidPassword] = React.useState(false);
 
     function handleChangeEmail(e) {
         setEmail(e.target.value);
+        setIsValidEmail(e.target.validity.valid && validator.isEmail(e.target.value));
     }
-
 
     function handleChangePassword(e) {
         setPassword(e.target.value);
+        setIsValidPassword(e.target.validity.valid);
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        onLogin({email,password});
     }
 
     return (
@@ -47,6 +56,8 @@ function Login() {
                 button={"Войти"}
                 span={"Ещё не зарегистрированы?"}
                 isRegister={false}
+                onSubmit={handleSubmit}
+                isValid={isValidEmail && isValidPassword}
             />
         </main>
     )

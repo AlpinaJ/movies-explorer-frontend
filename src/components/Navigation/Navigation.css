@@ -85,7 +85,7 @@
 .burger__close-button{
     width: 34px;
     height: 34px;
-    background-image: url("../../images/close.svg");
+    background-image: url("../../images/close-button.svg");
     position: fixed;
     right: 22px;
     top: 22px;
@@ -109,7 +109,7 @@
     border-bottom: 2px solid black;
 }
 .navigation__button_burger{
-    margin: 621px auto 0;
+    margin: 621px auto 90px;
 }
 
 .navigation__account-link{
@@ -122,5 +122,8 @@
     .burger__open{
         width: 100%;
         padding: 116px 0 46px;
+    }
+    .navigation__button_burger{
+        margin-bottom: 46px;
     }
 }
